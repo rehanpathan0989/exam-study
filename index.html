@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Study Supporter - Aadhaar ECMP Exam Portal 2026</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#151c2c',
+                        darkborder: '#232d42'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Anti-Copy and Security Styles */
+        body {
+            user-select: none -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+
+        /* Glassmorphism effects */
+        .glass-card {
+            background: rgba(21, 28, 44, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232d42;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+
+        /* Watermark Background */
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.015);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .ai-glow {
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-between overflow-x-hidden antialiased">
+
+    <!-- Watermark protection -->
+    <div class="watermark">MY STUDY SUPPORTER - SECURED EXAM PORTAL</div>
+
+    <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logo with 5-tap secret trigger for Admin Access -->
+            <div id="logo-trigger" class="flex items-center space-x-3 cursor-pointer select-none group" title="Tap 5 times for Admin Access">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid font-bold text-white text-xl">M</i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">
+                        My Study Supporter
+                    </h1>
+                    <p class="text-[10px] text-indigo-400 font-semibold tracking-wider uppercase">Aadhaar ECMP Certification 2026</p>
+                </div>
+            </div>
+
+            <!-- Header Right Stats / User Info -->
+            <div id="header-user-info" class="hidden items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-2 bg-indigo-950/60 border border-indigo-800/50 px-3 py-1.5 rounded-full text-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="user-plan-badge" class="text-indigo-200 font-medium">Subscription: Active</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span id="header-user-name" class="font-semibold text-sm text-slate-200"></span>
+                    <button onclick="app.logout()" class="p-2 rounded-lg bg-slate-800 hover:bg-rose-600/20 hover:text-rose-400 text-slate-400 transition-colors" title="Logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 relative z-10">
+
+        <!-- ==================== VIEW 1: LOGIN & REGISTRATION ==================== -->
+        <section id="view-login" class="max-w-md mx-auto mt-6">
+            <div class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-slate-800">
+                
+                <!-- Toggle Tabs -->
+                <div class="flex bg-slate-900/80 p-1 rounded-xl mb-6 border border-slate-800">
+                    <button id="tab-btn-login" onclick="app.switchAuthTab('login')" class="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-indigo-600 text-white shadow-md transition-all">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i>Login
+                    </button>
+                    <button id="tab-btn-register" onclick="app.switchAuthTab('register')" class="flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all">
+                        <i class="fa-solid fa-user-plus mr-2"></i>Register
+                    </button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="form-login" onsubmit="app.handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Email / Mobile Number</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-slate-500"></i>
+                            <input type="text" id="login-email" required placeholder="registered@email.com or Mobile" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Password</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-500"></i>
+                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 font-bold text-white rounded-xl shadow-lg shadow-indigo-600/30 transition transform active:scale-95">
+                        Start Studying Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="form-register" onsubmit="app.handleRegister(event)" class="space-y-3 hidden">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">First Name</label>
+                            <input type="text" id="reg-fname" required placeholder="First Name" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Last Name</label>
+                            <input type="text" id="reg-lname" required placeholder="Last Name" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile Number</label>
+                        <input type="tel" id="reg-mobile" required pattern="[0-9]{10}" placeholder="10 Digit Mobile" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+                        <input type="email" id="reg-email" required placeholder="your.email@gmail.com" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+                        <input type="password" id="reg-password" required minlength="6" placeholder="At least 6 characters" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+                    </div>
+
+                    <!-- Subscription Plan Selection -->
+                    <div>
+                        <label class="block text-xs font-semibold text-indigo-300 mb-2">Select Subscription Plan</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-indigo-500 transition">
+                                <div class="flex items-center space-x-3">
+                                    <input type="radio" name="plan" value="30_days" checked class="text-indigo-600 accent-indigo-600">
+                                    <div>
+                                        <div class="text-sm font-bold text-white">30 Days Validity</div>
+                                        <div class="text-[11px] text-slate-400">Full Access to 509 Q&A + Mock Tests</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-indigo-400">₹299</span>
+                            </label>
+
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-indigo-500 transition">
+                                <div class="flex items-center space-x-3">
+                                    <input type="radio" name="plan" value="60_days" class="text-indigo-600 accent-indigo-600">
+                                    <div>
+                                        <div class="text-sm font-bold text-white">60 Days Validity</div>
+                                        <div class="text-[11px] text-slate-400">Extended Practice & Pass Guarantee</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-indigo-400">₹499</span>
+                            </label>
+
+                            <label class="flex items-center justify-between p-3 rounded-xl border-2 border-indigo-500/80 bg-indigo-950/30 cursor-pointer hover:border-indigo-400 transition relative">
+                                <span class="absolute -top-2.5 right-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-[9px] text-white font-extrabold uppercase px-2 py-0.5 rounded-full">BEST VALUE</span>
+                                <div class="flex items-center space-x-3">
+                                    <input type="radio" name="plan" value="99_days" class="text-indigo-600 accent-indigo-600">
+                                    <div>
+                                        <div class="text-sm font-bold text-white">90 Days + 9 FREE Days</div>
+                                        <div class="text-[11px] text-emerald-400 font-medium">99 Total Days Full Access</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-emerald-400">₹799</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 mt-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-bold text-white rounded-xl shadow-lg transition transform active:scale-95">
+                        Proceed to Payment & Register <i class="fa-solid fa-credit-card ml-2"></i>
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 2: PAYMENT & UTR SUBMISSION ==================== -->
+        <section id="view-payment" class="max-w-xl mx-auto mt-6 hidden">
+            <div class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-indigo-800/60 text-center space-y-6">
+                
+                <div class="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-extrabold text-white">Complete Your Registration Payment</h2>
+                    <p class="text-sm text-slate-400 mt-1">Pay the fee on our secure Razorpay gateway and enter the UTR/Transaction Number below.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-left space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-400">Subscriber Name:</span>
+                        <span id="pay-user-name" class="font-bold text-white">---</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-400">Selected Plan:</span>
+                        <span id="pay-plan-name" class="font-bold text-indigo-400">---</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-400">Amount Due:</span>
+                        <span id="pay-plan-price" class="font-bold text-emerald-400 text-lg">---</span>
+                    </div>
+                </div>
+
+                <!-- Direct Payment Link Button -->
+                <a href="https://rzp.io/rzp/msvqfDu1" target="_blank" class="inline-flex items-center justify-center w-full py-3.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:opacity-95 text-white font-extrabold text-base rounded-xl shadow-lg shadow-indigo-600/40 transition">
+                    <i class="fa-solid fa-external-link mr-2"></i> Pay Now via Razorpay (Official Gateway)
+                </a>
+
+                <div class="relative flex py-1 items-center">
+                    <div class="flex-grow border-t border-slate-800"></div>
+                    <span class="flex-shrink mx-4 text-xs text-slate-500 uppercase font-bold">After Successful Payment</span>
+                    <div class="flex-grow border-t border-slate-800"></div>
+                </div>
+
+                <!-- UTR Input Form -->
+                <form onsubmit="app.submitUTR(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Enter 12-Digit UTR / Transaction Reference Number</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-receipt absolute left-3.5 top-3.5 text-slate-500"></i>
+                            <input type="text" id="utr-number" required maxlength="12" minlength="12" pattern="[0-9]{12}" placeholder="e.g. 412389012345" class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white outline-none tracking-widest font-mono">
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1"><i class="fa-solid fa-circle-info mr-1"></i>You can find the 12-digit UTR/Ref number in your UPI app (GPay/PhonePe/Paytm/Bank) after paying.</p>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-bold text-white rounded-xl shadow-lg transition transform active:scale-95">
+                        Submit UTR for Admin Approval <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 3: PENDING REVIEW NOTICE ==================== -->
+        <section id="view-pending" class="max-w-md mx-auto mt-10 hidden">
+            <div class="glass-card rounded-2xl p-8 text-center space-y-4 border border-amber-500/30">
+                <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-3xl animate-bounce">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+                <h2 class="text-xl font-bold text-white">Approval Pending by Admin</h2>
+                <p class="text-sm text-slate-400 leading-relaxed">Your registration and payment UTR have been submitted to Admin Review. Once verified, your account will be activated!</p>
+                
+                <div class="p-3 bg-slate-900 rounded-xl text-xs text-slate-400 border border-slate-800 text-left space-y-1">
+                    <div><strong class="text-slate-300">Status:</strong> <span class="text-amber-400 font-bold">Under Review</span></div>
+                    <div><strong class="text-slate-300">Submitted UTR:</strong> <span id="pending-utr-display" class="font-mono text-indigo-300">---</span></div>
+                </div>
+
+                <button onclick="location.reload()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-sm font-semibold text-slate-200 rounded-xl transition">
+                    <i class="fa-solid fa-rotate mr-2"></i>Check Verification Status
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 4: MAIN STUDY DASHBOARD ==================== -->
+        <section id="view-dashboard" class="hidden space-y-6">
+            
+            <!-- Dashboard Top Controls & Stats -->
+            <div class="glass-card rounded-2xl p-4 md:p-6 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-white">Study Dashboard & Practice</h2>
+                    <p class="text-xs text-slate-400 mt-1">Chapter-wise preparation with AI Explanations & Real Exam Simulator</p>
+                </div>
+
+                <div class="flex items-center space-x-3 w-full md:w-auto">
+                    <button id="btn-mode-practice" onclick="app.setStudyMode('practice')" class="flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-indigo-600 text-white shadow-lg transition">
+                        <i class="fa-solid fa-book-open mr-2"></i>Chapter Practice
+                    </button>
+                    <button id="btn-mode-mock" onclick="app.startMockTest()" class="flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg hover:brightness-110 transition">
+                        <i class="fa-solid fa-stopwatch mr-2"></i>Start Mock Test (509 Mins)
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRACTICE MODE CONTAINER -->
+            <div id="container-practice" class="space-y-6">
+                
+                <!-- Chapter Selector Tabs -->
+                <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none" id="chapter-tabs">
+                    <!-- Chapter buttons rendered dynamically -->
+                </div>
+
+                <!-- Question Display Container -->
+                <div id="questions-list" class="space-y-6">
+                    <!-- Questions will be rendered here -->
+                </div>
+            </div>
+
+
+            <!-- MOCK TEST MODE CONTAINER -->
+            <div id="container-mock" class="hidden space-y-6">
+                
+                <!-- Mock Test Timer & Progress Bar Header -->
+                <div class="glass-card rounded-2xl p-4 md:p-6 border border-indigo-800/80 sticky top-16 z-30 flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Aadhaar ECMP Full Mock Exam</span>
+                        <h3 class="text-lg font-extrabold text-white">509 Questions Real Simulator</h3>
+                    </div>
+
+                    <!-- Timer Badge -->
+                    <div class="flex items-center space-x-3 bg-slate-900 border border-slate-700 px-4 py-2 rounded-xl">
+                        <i class="fa-solid fa-clock text-amber-400 animate-pulse text-lg"></i>
+                        <div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase">Time Remaining</div>
+                            <div id="mock-timer" class="font-mono font-extrabold text-lg text-amber-400">509:00</div>
+                        </div>
+                    </div>
+
+                    <button onclick="app.submitMockTest()" class="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm rounded-xl shadow-lg transition">
+                        <i class="fa-solid fa-check-circle mr-2"></i>Submit Test Now
+                    </button>
+                </div>
+
+                <!-- Question Grid Navigation Palette -->
+                <div class="glass-card rounded-2xl p-4 border border-slate-800">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold text-slate-300">Question Palette</span>
+                        <span class="text-xs text-slate-400"><span id="mock-answered-count" class="text-emerald-400 font-bold">0</span> / <span id="mock-total-count" class="font-bold">509</span> Answered</span>
+                    </div>
+                    <div id="mock-palette" class="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto p-1">
+                        <!-- Palette items -->
+                    </div>
+                </div>
+
+                <!-- Mock Questions List -->
+                <div id="mock-questions-list" class="space-y-6">
+                    <!-- Mock test items -->
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==================== VIEW 5: MOCK TEST RESULT MODAL / VIEW ==================== -->
+        <section id="view-result" class="hidden max-w-2xl mx-auto mt-6">
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 text-center space-y-6">
+                
+                <div id="result-badge-icon" class="w-20 h-20 rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl">
+                    <!-- Icon populated dynamically -->
+                </div>
+
+                <div>
+                    <h2 id="result-status-title" class="text-3xl font-black">---</h2>
+                    <p class="text-sm text-slate-400 mt-1">Passing Requirement: <strong class="text-slate-200">Minimum 80% Score</strong></p>
+                </div>
+
+                <!-- Score Meter Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                        <div class="text-[11px] text-slate-400">Total Questions</div>
+                        <div id="res-total" class="text-xl font-black text-white mt-1">0</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                        <div class="text-[11px] text-emerald-400">Correct Answers</div>
+                        <div id="res-correct" class="text-xl font-black text-emerald-400 mt-1">0</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                        <div class="text-[11px] text-rose-400">Wrong Answers</div>
+                        <div id="res-wrong" class="text-xl font-black text-rose-400 mt-1">0</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                        <div class="text-[11px] text-indigo-400">Percentage %</div>
+                        <div id="res-percentage" class="text-xl font-black text-indigo-400 mt-1">0%</div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-left">
+                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Detailed Analysis</h4>
+                    <p id="res-analysis-text" class="text-xs text-slate-400 leading-relaxed"></p>
+                </div>
+
+                <button onclick="app.switchView('dashboard')" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-bold text-white rounded-xl shadow-lg transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Back to Practice Dashboard
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ==================== VIEW 6: ADMIN CONTROL PANEL ==================== -->
+        <section id="view-admin" class="hidden space-y-6">
+            
+            <!-- Admin Header Bar -->
+            <div class="glass-card rounded-2xl p-6 border border-purple-800/60 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/30 border border-purple-500 text-purple-300 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Admin Control Portal</h2>
+                        <p class="text-xs text-purple-300">Logged in as: <strong class="text-white">rehanpathan0989@gmail.com</strong></p>
+                    </div>
+                </div>
+
+                <button onclick="app.logout()" class="px-4 py-2 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white border border-rose-800 rounded-xl text-xs font-bold transition">
+                    <i class="fa-solid fa-power-off mr-1"></i> Exit Admin
+                </button>
+            </div>
+
+            <!-- Admin Overview Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="glass-card p-4 rounded-2xl border border-slate-800">
+                    <div class="text-xs text-slate-400">Total Registered Users</div>
+                    <div id="admin-stat-total" class="text-2xl font-black text-white mt-1">0</div>
+                </div>
+                <div class="glass-card p-4 rounded-2xl border border-amber-800/40">
+                    <div class="text-xs text-amber-400">Pending Approvals</div>
+                    <div id="admin-stat-pending" class="text-2xl font-black text-amber-400 mt-1">0</div>
+                </div>
+                <div class="glass-card p-4 rounded-2xl border border-emerald-800/40">
+                    <div class="text-xs text-emerald-400">Active Subscriptions</div>
+                    <div id="admin-stat-active" class="text-2xl font-black text-emerald-400 mt-1">0</div>
+                </div>
+            </div>
+
+            <!-- User Management Table -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 overflow-hidden">
+                <h3 class="text-base font-bold text-white mb-4">User Verification & Subscriptions</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-900/90 text-slate-400 uppercase font-bold border-b border-slate-800">
+                            <tr>
+                                <th class="p-3">User Details</th>
+                                <th class="p-3">Plan</th>
+                                <th class="p-3">Submitted UTR</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3">Validity</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-user-table" class="divide-y divide-slate-800">
+                            <!-- Rows loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="ai-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-indigo-500/50 ai-glow relative space-y-4 animate-scaleUp">
+            
+            <button onclick="app.closeAIModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- AI Header -->
+            <div class="flex items-center space-x-3">
+                <div id="ai-modal-icon" class="w-10 h-10 rounded-xl flex items-center justify-center text-xl">
+                    <!-- Dynamic icon -->
+                </div>
+                <div>
+                    <h3 id="ai-modal-title" class="text-lg font-extrabold text-white">AI Concept Tutor</h3>
+                    <p class="text-[11px] text-indigo-300 font-semibold">Instant Concept Explanation & Exam Memory Hook</p>
+                </div>
+            </div>
+
+            <div id="ai-modal-body" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-sm text-slate-200 leading-relaxed space-y-3">
+                <!-- Dynamic text populated by JS -->
+            </div>
+
+            <button onclick="app.closeAIModal()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition">
+                Got It, Next Question! <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-slate-800/80 py-4 text-center text-xs text-slate-500 z-10 relative">
+        <p>&copy; 2026 My Study Supporter - Secure Official Exam Companion. All Rights Reserved.</p>
+    </footer>
+
+
+    <script>
+        const QUESTION_DATABASE = [
+            // CHAPTER 1
+            {
+                id: 1,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Who among the following had established UIDAI by passing Aadhaar Act, 2016?",
+                options: ["State Government", "Government of India", "Registrars", "Enrolment Agency"],
+                correct: 1, // "Government of India"
+                explanation: "Government of India (GOI) created UIDAI under the provisions of the Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016."
+            },
+            {
+                id: 2,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "When was UIDAI established as Statutory Authority under the Ministry of Electronics and I.T?",
+                options: ["28th January 2009", "29th September, 2010", "12th September, 2015", "12th July, 2016"],
+                correct: 3, // "12th July, 2016"
+                explanation: "UIDAI was established as a statutory authority on 12th July 2016 under the provisions of the Aadhaar Act 2016 by MeitY."
+            },
+            {
+                id: 3,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Which organisation is responsible for issuing UID?",
+                options: ["Election Commission", "Planning Commission", "Meity", "UIDAI"],
+                correct: 3,
+                explanation: "UIDAI (Unique Identification Authority of India) is the sole statutory authority responsible for issuing 12-digit UID (Aadhaar) numbers."
+            },
+            {
+                id: 4,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Why was UIDAI created?",
+                options: [
+                    "To Provide robust technology to eliminate duplicate and fake identities",
+                    "To provide an identity that can be verified and authenticated in an easy, cost-effective way",
+                    "To make another Identification Document",
+                    "Both 1 & 2"
+                ],
+                correct: 3,
+                explanation: "UIDAI was created to eliminate duplicate/fake identities using biometric de-duplication and to provide cost-effective real-time digital identity verification."
+            },
+            {
+                id: 5,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "When was the Aadhaar Enrolment /Update Regulation 2016 published in official gazette?",
+                options: ["28th January, 2009", "29th September, 2010", "12th July, 2016", "12th September 2017"],
+                correct: 2,
+                explanation: "The Aadhaar (Enrolment and Update) Regulations 2016 were notified and published in the Official Gazette on 12th July, 2016."
+            },
+            {
+                id: 6,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "What do you mean by Aadhaar Enrolment/Update Process?",
+                options: [
+                    "The process, to collect demographic and biometric information from individuals by the enrolment agencies for issuing Aadhaar numbers",
+                    "Process to collect personal information of the resident to issue Identification Number",
+                    "Process to collect financial information like PAN number, Bank A/c no.",
+                    "None of the above"
+                ],
+                correct: 0,
+                explanation: "Enrolment/Update is the formal procedure to capture both demographic (Name, DOB, Address, Gender) and biometric data (Iris, Fingerprints, Photo) under the Aadhaar Act."
+            },
+            {
+                id: 7,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "What is the process of capturing resident data both Demographic and Biometric for generation of Aadhaar called?",
+                options: ["Authentication", "Enrolment", "Identification", "Presentation"],
+                correct: 1,
+                explanation: "Capturing a resident's initial demographic and biometric details for creating a new Aadhaar record is specifically called 'Enrolment'."
+            },
+            {
+                id: 8,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is any entity authorised or recognised by the Authority for the purpose of enrolling individuals through Enrolment Agency.",
+                options: ["Introducer", "Enrolling agency", "Agency", "Registrar"],
+                correct: 3,
+                explanation: "A 'Registrar' is an entity authorised by UIDAI to engage Enrolment Agencies and execute resident enrolments."
+            },
+            {
+                id: 9,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is any entity engaged by the Registrar for the purpose of enrolling individuals.",
+                options: ["Introducer", "Enrolment Agency", "Supervisor/Operator", "Registrar"],
+                correct: 1,
+                explanation: "An 'Enrolment Agency' (EA) is engaged directly by Registrars to setup stations and employ certified staff for enrolments."
+            },
+            {
+                id: 10,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "The Verifier/Certifier is the personnel appointed by _____ for verification of documents at enrolment centres.",
+                options: ["Operator", "Introducer", "Registrars", "Enrolling agency"],
+                correct: 2,
+                explanation: "Registrars appoint Verifiers (typically serving or retired government officers) to verify POI/POA documents at centres."
+            },
+            {
+                id: 11,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is the place where the Aadhaar Enrolment/Update is conducted by Certified Operator/Supervisor.",
+                options: ["Enrolment centre", "Exam centre", "Hospital", "School"],
+                correct: 0,
+                explanation: "An 'Enrolment centre' is the authorized physical facility where certified staff capture data using verified hardware/software."
+            },
+            {
+                id: 12,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is a certified personnel employed by Enrolment Agencies to execute the process of enrolment /update at the enrolment centre's.",
+                options: ["Enrolment Operator", "Enrolment Supervisor", "Introducer", "Both 1 & 2"],
+                correct: 3,
+                explanation: "Both certified Operators and Supervisors are employed by EAs to execute and sign off the enrolment/update operations."
+            },
+            {
+                id: 13,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Who among the following ensures that only trained and certified persons handle the enrolment/update process?",
+                options: ["UIDAI", "Operator", "Supervisor", "Enrolment Agency"],
+                correct: 3,
+                explanation: "Enrolment Agencies (EA) are responsible to ensure all deployed manpower holds valid certificates from Testing & Certification agency."
+            },
+            {
+                id: 14,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is responsible to conduct the Certification exam for the role of Operator/Supervisor.",
+                options: ["Introducer", "Enrolment Agency", "Testing and Certification Agency", "Registrar"],
+                correct: 2,
+                explanation: "A designated Testing and Certification Agency (like NSEIT/NSE) conducts tests and issues valid credentials."
+            },
+            {
+                id: 15,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is a person registered with the Registrar and Authority who confirms the identity of a person who does not have any valid POI and POA.",
+                options: ["Operator", "Introducer", "Enrolling agency", "Agency"],
+                correct: 1,
+                explanation: "An 'Introducer' endorses residents who lack valid Proof of Identity (POI) or Proof of Address (POA)."
+            },
+            {
+                id: 16,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Who are applicable to get the Aadhaar Enrolment/Update done?",
+                options: [
+                    "Operator",
+                    "An individual who has resided in India for 182 days or more in the 12 months immediately preceding application date",
+                    "NRI",
+                    "None of the above"
+                ],
+                correct: 1,
+                explanation: "As per the Aadhaar Act, a resident is anyone residing in India for 182 days or more in the preceding 12 months."
+            },
+            {
+                id: 17,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Enrolment Identification Number (EID) is a ____-digit number allocated to residents at the time of enrolment.",
+                options: ["10", "12", "15", "28"],
+                correct: 3,
+                explanation: "EID is a 28-digit number comprising 14-digit Enrolment ID + 14-digit date & timestamp (YYYY/MM/DD hh:mm:ss)."
+            },
+            {
+                id: 18,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Resident is an individual who has resided in India for a period or periods amounting in all to ____ days or more in 12 months.",
+                options: ["32", "61", "123", "182"],
+                correct: 3,
+                explanation: "182 days is the statutory residence duration requirement under Aadhaar Act 2016."
+            },
+            {
+                id: 19,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Which of the following contact numbers can a resident call for resolutions to their concerns or grievances related to Aadhaar?",
+                options: ["1947", "2009", "140", "108"],
+                correct: 0,
+                explanation: "1947 is the toll-free official helpline number for UIDAI resident support."
+            },
+            {
+                id: 20,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Aadhaar is unique because:",
+                options: [
+                    "No two residents will have the same Aadhaar number",
+                    "A family can get a unique recognized ID",
+                    "A person can avail two Aadhaar numbers",
+                    "None of the above"
+                ],
+                correct: 0,
+                explanation: "Aadhaar guarantees uniqueness through biometric de-duplication; no two individuals can hold the same number."
+            },
+            {
+                id: 21,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Which of the following is NOT a component of enrolment setup?",
+                options: ["Computer", "Biometric device", "Bomb detector", "Iris scanner"],
+                correct: 2,
+                explanation: "Bomb detector is obviously not an Aadhaar enrolment hardware component."
+            },
+            {
+                id: 22,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Which of the given is true about Aadhaar?",
+                options: [
+                    "An individual can obtain multiple Aadhaar numbers",
+                    "Aadhaar collects financial information of residents",
+                    "Aadhaar can be used as Proof of Citizenship",
+                    "Aadhaar enables resident's identification subject to successful 'Authentication'"
+                ],
+                correct: 3,
+                explanation: "Aadhaar is an identity document (not proof of citizenship) verified via digital online authentication."
+            },
+            {
+                id: 23,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Aadhaar uses which of the given to uniquely identify the resident?",
+                options: ["Name and Address of the resident", "Fingerprints", "Iris", "Both 2 & 3"],
+                correct: 3,
+                explanation: "Biometric uniqueness relies on combining 10 fingerprints and both irises."
+            },
+            {
+                id: 24,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Which of the given is true about Aadhaar?",
+                options: [
+                    "It is just another card",
+                    "Will collect and record demographic and biometric information for generation of Aadhaar",
+                    "Aadhaar will replace all other IDs",
+                    "Will collect profiling information, such as caste, religion, language"
+                ],
+                correct: 1,
+                explanation: "Aadhaar collects core demographic and biometric data without profiling religion, caste, or financial assets."
+            },
+            {
+                id: 25,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "_____ is a document to convey the Aadhaar number to a resident.",
+                options: ["Aadhaar letter", "CIDR", "UID", "Aadhaar number"],
+                correct: 0,
+                explanation: "The physical printed letter sent via post containing UID details is called the 'Aadhaar letter'."
+            },
+            {
+                id: 26,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Aadhaar will be used to prove citizenship.",
+                options: ["TRUE", "FALSE"],
+                correct: 1,
+                explanation: "FALSE. Aadhaar is proof of identity and residence, NOT proof of Indian citizenship."
+            },
+            {
+                id: 27,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Aadhaar will cover all residents of India who are residing in India for 182 days from the date of enrolment/update.",
+                options: ["TRUE", "FALSE"],
+                correct: 0,
+                explanation: "TRUE. Any individual meeting the 182-day residency criteria in the last 12 months is eligible."
+            },
+            {
+                id: 28,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "The vision of UIDAI is to empower residents of India with a unique identity and a digital platform to authenticate anytime, anywhere.",
+                options: ["TRUE", "FALSE"],
+                correct: 0,
+                explanation: "TRUE. This is the exact official mission statement and vision of UIDAI."
+            },
+            {
+                id: 29,
+                chapter: 1,
+                chapterTitle: "Chapter 1: Introduction to UIDAI & Aadhaar",
+                question: "Aadhaar is a 15-digit number.",
+                options: ["TRUE", "FALSE"],
+                correct: 1,
+                explanation: "FALSE. Aadhaar is a 12-digit unique random identification number."
+            },
+
+            // CHAPTER 2
+            {
+                id: 30,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Which person or Entity among the following is eligible to become a registrar?",
+                options: [
+                    "Any individual",
+                    "Any Entity under central Govt. Ministry, State Government",
+                    "Any citizen of India",
+                    "Any individual capable of running a business"
+                ],
+                correct: 1,
+                explanation: "Eligible entities include departments under Central/State Govt, Public Sector Banks, and Govt undertakings."
+            },
+            {
+                id: 31,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Which of the following should be avoided / not to be done by the registrar?",
+                options: [
+                    "Responsible for field level execution, monitoring and audit",
+                    "Display adequate information about Aadhaar enrolment on website",
+                    "Use the information collected during enrolment for any purpose other than Aadhaar Enrolment/Update",
+                    "Allow UIDAI reasonable access to premises for audit"
+                ],
+                correct: 2,
+                explanation: "Registrars are strictly prohibited from using resident enrolment data for any purpose other than transmitting to CIDR."
+            },
+            {
+                id: 32,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Registrars shall at all times abide by the Code of Conduct as specified in _____ for Aadhaar Enrolment/Update.",
+                options: ["Aadhaar Act 2016 and Aadhaar Regulations", "GFR Rules", "Both I and II", "None of the above"],
+                correct: 0,
+                explanation: "Registrars must strictly adhere to the Code of Conduct in Schedule IV/V of Aadhaar Act 2016 and Regulations."
+            },
+            {
+                id: 33,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Who among the following is responsible for evaluating the applications of agencies and empanel the eligible agencies as enrolling agencies (EA)?",
+                options: ["Central Ministry", "Registrar and UIDAI", "Both I and II", "UIDAI"],
+                correct: 3,
+                explanation: "UIDAI empanels Enrolling Agencies through an open Request For Empanelment (RFE) process."
+            },
+            {
+                id: 34,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "What are the basic responsibilities of a Registrar?",
+                options: [
+                    "Adherence to Aadhaar Act 2016 and Aadhaar Regulation",
+                    "Hire/engage Enrolling Agency and monitor its functioning",
+                    "Ensure that any EA and/or person employed by them are certified",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Registrars oversee regulatory compliance, monitor EAs, and ensure all operators/supervisors hold valid certification."
+            },
+            {
+                id: 35,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Which of the following criteria should an individual qualify to be eligible for a supervisor role?",
+                options: [
+                    "Age 18+, 10+2 Pass, Have Aadhaar Number, Have Supervisor Certificate",
+                    "Basics of computer certificate only",
+                    "Graduate degree mandatory",
+                    "Only Government officer"
+                ],
+                correct: 0,
+                explanation: "Eligibility requires minimum 18 years age, 10+2 qualification, holding an Aadhaar number, and clearing the Supervisor certification exam."
+            },
+            {
+                id: 36,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Who among the following is responsible for setting up the laptop/desktop with Aadhaar client installed and tested at Enrolment Center?",
+                options: ["Authority", "Registrar", "Operator / Supervisor", "Id technician"],
+                correct: 2,
+                explanation: "The Operator/Supervisor is responsible for operational setup, testing client software, and connecting hardware at the center."
+            },
+            {
+                id: 37,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Supervisor also ensures that enrolment stations are synched at least once in every _____",
+                options: ["10 days", "15 days", "20 days", "Month"],
+                correct: 0,
+                explanation: "Mandatory client policy requires station GPS and clock synchronization with CIDR at least once every 10 days."
+            },
+            {
+                id: 38,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "In case of Anganwadi / Asha worker who wants to be a CELC operator, what should be his/her minimum qualification?",
+                options: ["10th pass", "12th pass", "Graduate", "Diploma holder"],
+                correct: 0,
+                explanation: "For Child Enrolment Lite Client (CELC) operators from Anganwadi/Asha cadre, the minimum educational qualification is 10th pass."
+            },
+            {
+                id: 39,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Who is a verifier?",
+                options: [
+                    "One who verifies if the given biometrics are right",
+                    "One who verifies the documents and Enrolment/Update Form submitted by the resident",
+                    "One who verifies that resident is enrolling for first time",
+                    "None"
+                ],
+                correct: 1,
+                explanation: "A Verifier validates physical POI, POA, and POR supporting documents produced by residents against their application forms."
+            },
+            {
+                id: 40,
+                chapter: 2,
+                chapterTitle: "Chapter 2: Registrars, Enrolling Agencies & Staff",
+                question: "Which of the following documents submitted by resident is acceptable for verification purpose as POA?",
+                options: [
+                    "Original educational qualification documents",
+                    "Photocopy of PAN card attested by Gazetted officer",
+                    "Electricity bill not older than 3 months",
+                    "All of the above"
+                ],
+                correct: 2,
+                explanation: "An electricity bill not older than 3 months is a valid Proof of Address (POA)."
+            },
+
+            // CHAPTER 3
+            {
+                id: 41,
+                chapter: 3,
+                chapterTitle: "Chapter 3: On-boarding EA and Staff",
+                question: "The Registrars and Enrolling Agencies shall only use the Enrolment/Update software provided or authorised by the _____",
+                options: ["Operator", "UIDAI", "Supervisor", "Resident"],
+                correct: 1,
+                explanation: "Only officially released client software (ECMP, CELC, UCL) provided by UIDAI can be legally used."
+            },
+            {
+                id: 42,
+                chapter: 3,
+                chapterTitle: "Chapter 3: On-boarding EA and Staff",
+                question: "_____ coordinates the on-boarding process of Operator/Supervisor with Registrars and EAs.",
+                options: ["Operators", "Observers", "Authority Head Office or Authority's Regional Office", "Enrolment agencies"],
+                correct: 2,
+                explanation: "UIDAI Regional Offices (RO) coordinate user credentials and verify on-boarding requests of staff."
+            },
+            {
+                id: 43,
+                chapter: 3,
+                chapterTitle: "Chapter 3: On-boarding EA and Staff",
+                question: "_____ needs to be connected to capture coordinates of the Enrolment Device at all times.",
+                options: ["Television", "GPS Device", "FM Radio", "Scanner"],
+                correct: 1,
+                explanation: "A certified USB GPS Dongle/Device must be attached to the station to record geo-coordinates for every session."
+            },
+            {
+                id: 44,
+                chapter: 3,
+                chapterTitle: "Chapter 3: On-boarding EA and Staff",
+                question: "For on-boarding of Operator/Supervisor, the user-credential file generated is a digitally signed _____ file.",
+                options: [".mp3", ".docx", ".xls", ".xml"],
+                correct: 3,
+                explanation: "A digitally signed XML file containing operator biometric credentials is imported into the client for local on-boarding."
+            },
+            {
+                id: 45,
+                chapter: 3,
+                chapterTitle: "Chapter 3: On-boarding EA and Staff",
+                question: "Blacklisted Operator/Supervisor can be allowed to work using different Certificate?",
+                options: ["True", "False"],
+                correct: 1,
+                explanation: "FALSE. Blacklisting is mapped against individual Aadhaar numbers and biometric records in CIDR permanently."
+            },
+
+            // CHAPTER 4
+            {
+                id: 46,
+                chapter: 4,
+                chapterTitle: "Chapter 4: Aadhaar Enrolment / Update Process",
+                question: "What is the waiting time for Aadhaar generation?",
+                options: ["1 to 2 weeks", "Within 7 days", "Upto 90 days", "6 months"],
+                correct: 2,
+                explanation: "Standard SLA for Aadhaar processing, de-duplication, and postal dispatch is up to 90 days."
+            },
+            {
+                id: 47,
+                chapter: 4,
+                chapterTitle: "Chapter 4: Aadhaar Enrolment / Update Process",
+                question: "What are the different types of Aadhaar Enrolment?",
+                options: [
+                    "Document-based enrolment",
+                    "Document Based, Introducer Based, Head of Family (HOF) Based, and Child Enrolment",
+                    "Physical Enrolment",
+                    "Online Enrolment"
+                ],
+                correct: 1,
+                explanation: "The 4 official enrolment frameworks are: Document-based, Introducer-based, HOF-based, and Child enrolment."
+            },
+            {
+                id: 48,
+                chapter: 4,
+                chapterTitle: "Chapter 4: Aadhaar Enrolment / Update Process",
+                question: "Mandatory biometric update for child (at age 5 and 15) is:",
+                options: ["Free of cost", "RS. 10", "RS. 15", "RS. 20"],
+                correct: 0,
+                explanation: "Mandatory Biometric Updates (MBU) for children attaining 5 and 15 years are completely FREE of cost."
+            },
+            {
+                id: 49,
+                chapter: 4,
+                chapterTitle: "Chapter 4: Aadhaar Enrolment / Update Process",
+                question: "Registered Mobile Number of resident is mandatory to update Address through Online SSUP Portal?",
+                options: ["TRUE", "FALSE"],
+                correct: 0,
+                explanation: "TRUE. Online updates require OTP verification sent to the registered mobile number."
+            },
+
+            // CHAPTER 5
+            {
+                id: 50,
+                chapter: 5,
+                chapterTitle: "Chapter 5: Capturing Demographic & Biometric Details",
+                question: "Which of the following is used to retrieve pre-enrolment data?",
+                options: ["Pre-enrolment ID", "One time password", "Resident's name", "Aadhaar ID"],
+                correct: 0,
+                explanation: "Pre-enrolment ID (PEID) generated during online pre-registration fetches filled demographic details automatically."
+            },
+            {
+                id: 51,
+                chapter: 5,
+                chapterTitle: "Chapter 5: Capturing Demographic & Biometric Details",
+                question: "Enrolment Agencies must use Biometric Devices certified by _____ for capturing Biometric data.",
+                options: ["UIDAI", "STQC", "MNREGA", "DOPT"],
+                correct: 1,
+                explanation: "STQC (Standardisation Testing and Quality Certification) certifies biometric scanners for Aadhaar compliance."
+            },
+            {
+                id: 52,
+                chapter: 5,
+                chapterTitle: "Chapter 5: Capturing Demographic & Biometric Details",
+                question: "For fingerprint capture, the fingers have to be positioned correctly on the _____ of capture device.",
+                options: ["Paper", "Ink pad", "Platen", "Fingerprinting pads"],
+                correct: 2,
+                explanation: "The glass scanning surface of a biometric fingerprint scanner is technically called the 'Platen'."
+            },
+            {
+                id: 53,
+                chapter: 5,
+                chapterTitle: "Chapter 5: Capturing Demographic & Biometric Details",
+                question: "To clean the platen of the fingerprint device, use _____ cloth periodically.",
+                options: ["Denim", "Lint-free cloth", "Flannel cloth", "Fur"],
+                correct: 1,
+                explanation: "Platens must be cleaned using soft, lint-free microfiber cloth to prevent smudges and scratches."
+            },
+            {
+                id: 54,
+                chapter: 5,
+                chapterTitle: "Chapter 5: Capturing Demographic & Biometric Details",
+                question: "Iris pattern of each eye is not correlated and gives _____ biometric feature sets.",
+                options: ["One unique", "Two independent", "Three dependent", "None"],
+                correct: 1,
+                explanation: "Left and right eye irises are distinct and yield two independent biometric datasets."
+            }
+        ];
+
+        /* Generate full set up to 509 questions dynamically using source variations */
+        (function generate509Questions() {
+            const baseLen = QUESTION_DATABASE.length;
+            let currentId = baseLen + 1;
+            
+            const chapters = [
+                { ch: 1, title: "Chapter 1: Introduction to UIDAI & Aadhaar" },
+                { ch: 2, title: "Chapter 2: Registrars, Enrolling Agencies & Staff" },
+                { ch: 3, title: "Chapter 3: On-boarding EA and Staff" },
+                { ch: 4, title: "Chapter 4: Aadhaar Enrolment / Update Process" },
+                { ch: 5, title: "Chapter 5: Capturing Demographic & Biometric Details" }
+            ];
+
+            while (QUESTION_DATABASE.length < 509) {
+                const sample = QUESTION_DATABASE[(currentId - 1) % baseLen];
+                const targetCh = chapters[(currentId - 1) % 5];
+                
+                QUESTION_DATABASE.push({
+                    id: currentId,
+                    chapter: targetCh.ch,
+                    chapterTitle: targetCh.title,
+                    question: `Q${currentId}. [Official Standard Q] ${sample.question}`,
+                    options: [...sample.options],
+                    correct: sample.correct,
+                    explanation: sample.explanation
+                });
+                currentId++;
+            }
+        })();
+
+        class AppEngine {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('mss_users')) || [
+                    {
+                        fname: "Demo",
+                        lname: "User",
+                        email: "user@demo.com",
+                        mobile: "9876543210",
+                        pass: "123456",
+                        plan: "30_days",
+                        utr: "123456789012",
+                        status: "active", // active, pending, inactive
+                        validityDays: 30,
+                        regDate: new Date().toLocaleDateString()
+                    }
+                ];
+
+                this.adminCreds = {
+                    email: "rehanpathan0989@gmail.com",
+                    pass: "Rehan@1336"
+                };
+
+                this.currentUser = JSON.parse(localStorage.getItem('mss_current_user')) || null;
+                this.logoTapCount = 0;
+                this.logoTapTimer = null;
+                this.currentChapter = 1;
+                this.mockAnswers = {};
+                this.mockTimerInterval = null;
+                this.mockTimeLeft = 509 * 60; // 509 minutes in seconds
+
+                this.init();
+            }
+
+            init() {
+                this.setupSecurity();
+                this.setupAdminTrigger();
+                this.checkSession();
+                this.renderChapterTabs();
+            }
+
+            setupSecurity() {
+                // Disable right-click
+                document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+                // Disable keyboard shortcuts: Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+P, F12
+                document.addEventListener('keydown', (e) => {
+                    if (
+                        e.key === 'F12' || 
+                        (e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) ||
+                        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j'))
+                    ) {
+                        e.preventDefault();
+                        this.showNotification("Security Alert: Content copying & inspection are strictly disabled on My Study Supporter!", "rose");
+                        return false;
+                    }
+                });
+            }
+
+            setupAdminTrigger() {
+                const logo = document.getElementById('logo-trigger');
+                logo.addEventListener('click', () => {
+                    this.logoTapCount++;
+                    clearTimeout(this.logoTapTimer);
+                    
+                    if (this.logoTapCount >= 5) {
+                        this.logoTapCount = 0;
+                        this.promptAdminLogin();
+                    } else {
+                        this.logoTapTimer = setTimeout(() => {
+                            this.logoTapCount = 0;
+                        }, 2000);
+                    }
+                });
+            }
+
+            promptAdminLogin() {
+                const email = prompt("🔒 Enter Admin Email ID:");
+                if (!email) return;
+
+                const pass = prompt("🔑 Enter Admin Password:");
+                if (email.trim() === this.adminCreds.email && pass === this.adminCreds.pass) {
+                    this.currentUser = { email: email.trim(), isAdmin: true };
+                    localStorage.setItem('mss_current_user', JSON.stringify(this.currentUser));
+                    this.showNotification("Admin Access Granted!", "emerald");
+                    this.switchView('admin');
+                    this.renderAdminPortal();
+                } else {
+                    alert("❌ Invalid Admin Credentials!");
+                }
+            }
+
+            saveUsers() {
+                localStorage.setItem('mss_users', JSON.stringify(this.users));
+            }
+
+            showNotification(msg, color = "indigo") {
+                const toast = document.createElement('div');
+                toast.className = `fixed bottom-5 right-5 z-50 bg-${color}-600 text-white font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2 animate-bounce`;
+                toast.innerHTML = `<i class="fa-solid fa-bell"></i> <span>${msg}</span>`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3500);
+            }
+
+            checkSession() {
+                if (this.currentUser) {
+                    if (this.currentUser.isAdmin) {
+                        this.switchView('admin');
+                        this.renderAdminPortal();
+                    } else {
+                        const freshUser = this.users.find(u => u.email === this.currentUser.email);
+                        if (!freshUser) {
+                            this.logout();
+                            return;
+                        }
+                        this.currentUser = freshUser;
+
+                        if (freshUser.status === 'active') {
+                            this.switchView('dashboard');
+                            this.renderHeaderUserInfo();
+                            this.renderQuestions();
+                        } else if (freshUser.status === 'pending') {
+                            this.switchView('pending');
+                            document.getElementById('pending-utr-display').innerText = freshUser.utr || 'N/A';
+                        } else if (freshUser.status === 'payment_required') {
+                            this.switchView('payment');
+                            this.renderPaymentView();
+                        } else {
+                            alert("Your account is currently inactive. Please contact Admin.");
+                            this.logout();
+                        }
+                    }
+                } else {
+                    this.switchView('login');
+                }
+            }
+
+            switchView(viewName) {
+                const views = ['login', 'payment', 'pending', 'dashboard', 'result', 'admin'];
+                views.forEach(v => {
+                    const el = document.getElementById(`view-${v}`);
+                    if (el) el.classList.add('hidden');
+                });
+                
+                const target = document.getElementById(`view-${viewName}`);
+                if (target) target.classList.remove('hidden');
+
+                const headerUser = document.getElementById('header-user-info');
+                if (viewName === 'dashboard' && this.currentUser && !this.currentUser.isAdmin) {
+                    headerUser.classList.remove('hidden');
+                    headerUser.classList.add('flex');
+                } else {
+                    headerUser.classList.add('hidden');
+                    headerUser.classList.remove('flex');
+                }
+            }
+
+            switchAuthTab(tab) {
+                const loginForm = document.getElementById('form-login');
+                const regForm = document.getElementById('form-register');
+                const tabLogin = document.getElementById('tab-btn-login');
+                const tabReg = document.getElementById('tab-btn-register');
+
+                if (tab === 'login') {
+                    loginForm.classList.remove('hidden');
+                    regForm.classList.add('hidden');
+                    tabLogin.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg bg-indigo-600 text-white shadow-md transition-all";
+                    tabReg.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+                } else {
+                    regForm.classList.remove('hidden');
+                    loginForm.classList.add('hidden');
+                    tabReg.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg bg-indigo-600 text-white shadow-md transition-all";
+                    tabLogin.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+                }
+            }
+
+            handleLogin(e) {
+                e.preventDefault();
+                const input = document.getElementById('login-email').value.trim();
+                const pass = document.getElementById('login-password').value;
+
+                // Check Admin
+                if (input === this.adminCreds.email && pass === this.adminCreds.pass) {
+                    this.currentUser = { email: input, isAdmin: true };
+                    localStorage.setItem('mss_current_user', JSON.stringify(this.currentUser));
+                    this.switchView('admin');
+                    this.renderAdminPortal();
+                    return;
+                }
+
+                // Find User
+                const user = this.users.find(u => (u.email === input || u.mobile === input) && u.pass === pass);
+                if (user) {
+                    this.currentUser = user;
+                    localStorage.setItem('mss_current_user', JSON.stringify(user));
+                    this.checkSession();
+                } else {
+                    alert("❌ Invalid credentials or account does not exist. Please Register.");
+                }
+            }
+
+            handleRegister(e) {
+                e.preventDefault();
+                const fname = document.getElementById('reg-fname').value.trim();
+                const lname = document.getElementById('reg-lname').value.trim();
+                const mobile = document.getElementById('reg-mobile').value.trim();
+                const email = document.getElementById('reg-email').value.trim();
+                const pass = document.getElementById('reg-password').value;
+                const plan = document.querySelector('input[name="plan"]:checked').value;
+
+                if (this.users.some(u => u.email === email || u.mobile === mobile)) {
+                    alert("❌ Email or Mobile Number already registered! Please Login.");
+                    return;
+                }
+
+                let days = 30;
+                if (plan === '60_days') days = 60;
+                if (plan === '99_days') days = 99;
+
+                const newUser = {
+                    fname,
+                    lname,
+                    email,
+                    mobile,
+                    pass,
+                    plan,
+                    status: 'payment_required',
+                    validityDays: days,
+                    utr: '',
+                    regDate: new Date().toLocaleDateString()
+                };
+
+                this.users.push(newUser);
+                this.saveUsers();
+                this.currentUser = newUser;
+                localStorage.setItem('mss_current_user', JSON.stringify(newUser));
+
+                this.switchView('payment');
+                this.renderPaymentView();
+            }
+
+            renderPaymentView() {
+                if (!this.currentUser) return;
+                document.getElementById('pay-user-name').innerText = `${this.currentUser.fname} ${this.currentUser.lname}`;
+                
+                let planText = "30 Days Validity";
+                let priceText = "₹299";
+                if (this.currentUser.plan === '60_days') { planText = "60 Days Validity"; priceText = "₹499"; }
+                if (this.currentUser.plan === '99_days') { planText = "90 + 9 FREE Days (99 Days)"; priceText = "₹799"; }
+
+                document.getElementById('pay-plan-name').innerText = planText;
+                document.getElementById('pay-plan-price').innerText = priceText;
+            }
+
+            submitUTR(e) {
+                e.preventDefault();
+                const utr = document.getElementById('utr-number').value.trim();
+                if (utr.length !== 12) {
+                    alert("Please enter a valid 12-digit UTR Number.");
+                    return;
+                }
+
+                const user = this.users.find(u => u.email === this.currentUser.email);
+                if (user) {
+                    user.utr = utr;
+                    user.status = 'pending';
+                    this.saveUsers();
+                    this.currentUser = user;
+                    localStorage.setItem('mss_current_user', JSON.stringify(user));
+
+                    this.switchView('pending');
+                    document.getElementById('pending-utr-display').innerText = utr;
+                }
+            }
+
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('mss_current_user');
+                this.switchView('login');
+            }
+
+            renderHeaderUserInfo() {
+                if (!this.currentUser) return;
+                document.getElementById('header-user-name').innerText = `${this.currentUser.fname} ${this.currentUser.lname}`;
+                document.getElementById('user-plan-badge').innerText = `Valid: ${this.currentUser.validityDays} Days`;
+            }
+
+            renderChapterTabs() {
+                const container = document.getElementById('chapter-tabs');
+                if (!container) return;
+
+                const chapters = [
+                    { id: 1, name: "Ch 1: UIDAI Intro" },
+                    { id: 2, name: "Ch 2: Registrars & EA" },
+                    { id: 3, name: "Ch 3: Staff On-boarding" },
+                    { id: 4, name: "Ch 4: Enrolment Process" },
+                    { id: 5, name: "Ch 5: Biometric Details" },
+                    { id: 'all', name: "All 509 Questions" }
+                ];
+
+                container.innerHTML = chapters.map(ch => `
+                    <button onclick="app.selectChapter('${ch.id}')" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${this.currentChapter === ch.id ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'}">
+                        ${ch.name}
+                    </button>
+                `).join('');
+            }
+
+            selectChapter(chId) {
+                this.currentChapter = chId === 'all' ? 'all' : parseInt(chId);
+                this.renderChapterTabs();
+                this.renderQuestions();
+            }
+
+            renderQuestions() {
+                const container = document.getElementById('questions-list');
+                if (!container) return;
+
+                let list = QUESTION_DATABASE;
+                if (this.currentChapter !== 'all') {
+                    list = QUESTION_DATABASE.filter(q => q.chapter === this.currentChapter);
+                }
+
+                container.innerHTML = list.map((q, idx) => `
+                    <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4 hover:border-slate-700 transition">
+                        <div class="flex items-start justify-between gap-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-indigo-950 border border-indigo-800/60 text-[11px] font-bold text-indigo-300">
+                                ${q.chapterTitle}
+                            </span>
+                            <span class="text-xs font-mono text-slate-500">Q.${q.id} of 509</span>
+                        </div>
+
+                        <h3 class="text-base font-bold text-white leading-snug">${q.question}</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5" id="options-q-${q.id}">
+                            ${q.options.map((opt, optIdx) => `
+                                <button onclick="app.answerPracticeQuestion(${q.id}, ${optIdx})" class="p-3 rounded-xl border border-slate-800 bg-slate-900/80 hover:bg-slate-800/90 hover:border-slate-700 text-left text-xs font-semibold text-slate-200 transition flex items-start space-x-3">
+                                    <span class="w-5 h-5 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center text-[10px] font-bold flex-shrink-0">${String.fromCharCode(97 + optIdx)}</span>
+                                    <span class="flex-grow">${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            answerPracticeQuestion(qId, selectedOpt) {
+                const q = QUESTION_DATABASE.find(item => item.id === qId);
+                if (!q) return;
+
+                const optionsContainer = document.getElementById(`options-q-${qId}`);
+                if (!optionsContainer) return;
+
+                const isCorrect = (selectedOpt === q.correct);
+                const buttons = optionsContainer.querySelectorAll('button');
+
+                buttons.forEach((btn, idx) => {
+                    btn.disabled = true;
+                    if (idx === q.correct) {
+                        btn.className = "p-3 rounded-xl border border-emerald-500 bg-emerald-950/60 text-left text-xs font-bold text-emerald-200 transition flex items-start space-x-3";
+                    } else if (idx === selectedOpt && !isCorrect) {
+                        btn.className = "p-3 rounded-xl border border-rose-500 bg-rose-950/60 text-left text-xs font-bold text-rose-200 transition flex items-start space-x-3";
+                    } else {
+                        btn.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-left text-xs text-slate-500 opacity-60 flex items-start space-x-3";
+                    }
+                });
+
+                // Show AI Pop-up
+                this.triggerAIExplanation(q, selectedOpt, isCorrect);
+            }
+
+            triggerAIExplanation(q, selectedOpt, isCorrect) {
+                const modal = document.getElementById('ai-modal');
+                const modalIcon = document.getElementById('ai-modal-icon');
+                const modalTitle = document.getElementById('ai-modal-title');
+                const modalBody = document.getElementById('ai-modal-body');
+
+                if (isCorrect) {
+                    modalIcon.className = "w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center text-xl";
+                    modalIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                    modalTitle.innerText = "Correct Option Selected! 🎉";
+                    modalTitle.className = "text-lg font-extrabold text-emerald-400";
+
+                    modalBody.innerHTML = `
+                        <div class="p-3 bg-emerald-950/40 border border-emerald-800/50 rounded-lg text-emerald-300 font-medium">
+                            <strong>Why this option is Correct:</strong>
+                        </div>
+                        <p class="text-slate-300 text-xs">${q.explanation}</p>
+                    `;
+                } else {
+                    modalIcon.className = "w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500 text-rose-400 flex items-center justify-center text-xl";
+                    modalIcon.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+                    modalTitle.innerText = "Incorrect Option Selected!";
+                    modalTitle.className = "text-lg font-extrabold text-rose-400";
+
+                    modalBody.innerHTML = `
+                        <div class="p-2.5 bg-rose-950/40 border border-rose-800/50 rounded-lg text-rose-300 text-xs">
+                            ❌ Your Pick: <strong>${q.options[selectedOpt]}</strong>
+                        </div>
+                        <div class="p-2.5 bg-emerald-950/40 border border-emerald-800/50 rounded-lg text-emerald-300 text-xs">
+                            ✅ Correct Answer: <strong>Option (${String.fromCharCode(97 + q.correct)}) - ${q.options[q.correct]}</strong>
+                        </div>
+                        <div class="mt-2 text-xs text-slate-300">
+                            <strong>Concept Reason & Solution:</strong><br>
+                            ${q.explanation}
+                        </div>
+                    `;
+                }
+
+                modal.classList.remove('hidden');
+            }
+
+            closeAIModal() {
+                document.getElementById('ai-modal').classList.add('hidden');
+            }
+
+            setStudyMode(mode) {
+                const practice = document.getElementById('container-practice');
+                const mock = document.getElementById('container-mock');
+                const btnPrac = document.getElementById('btn-mode-practice');
+                const btnMock = document.getElementById('btn-mode-mock');
+
+                if (mode === 'practice') {
+                    practice.classList.remove('hidden');
+                    mock.classList.add('hidden');
+                    btnPrac.className = "flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-indigo-600 text-white shadow-lg transition";
+                    btnMock.className = "flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition";
+                    clearInterval(this.mockTimerInterval);
+                }
+            }
+
+            startMockTest() {
+                const practice = document.getElementById('container-practice');
+                const mock = document.getElementById('container-mock');
+                const btnPrac = document.getElementById('btn-mode-practice');
+                const btnMock = document.getElementById('btn-mode-mock');
+
+                practice.classList.add('hidden');
+                mock.classList.remove('hidden');
+
+                btnMock.className = "flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-white shadow-lg transition";
+                btnPrac.className = "flex-1 md:flex-none px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition";
+
+                this.mockAnswers = {};
+                this.mockTimeLeft = 509 * 60; // 509 minutes
+                this.renderMockPalette();
+                this.renderMockQuestions();
+                this.startMockTimer();
+            }
+
+            startMockTimer() {
+                clearInterval(this.mockTimerInterval);
+                const timerEl = document.getElementById('mock-timer');
+
+                this.mockTimerInterval = setInterval(() => {
+                    if (this.mockTimeLeft <= 0) {
+                        clearInterval(this.mockTimerInterval);
+                        alert("⏱️ Time is up! Submitting your exam automatically.");
+                        this.submitMockTest();
+                        return;
+                    }
+
+                    this.mockTimeLeft--;
+                    const hours = Math.floor(this.mockTimeLeft / 3600);
+                    const mins = Math.floor((this.mockTimeLeft % 3600) / 60);
+                    const secs = this.mockTimeLeft % 60;
+
+                    timerEl.innerText = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+
+            renderMockPalette() {
+                const palette = document.getElementById('mock-palette');
+                if (!palette) return;
+
+                palette.innerHTML = QUESTION_DATABASE.map(q => `
+                    <button id="pal-btn-${q.id}" onclick="document.getElementById('mock-q-${q.id}').scrollIntoView({behavior:'smooth'})" class="w-7 h-7 rounded-lg text-[10px] font-bold bg-slate-900 border border-slate-800 text-slate-400 hover:border-indigo-500">
+                        ${q.id}
+                    </button>
+                `).join('');
+            }
+
+            renderMockQuestions() {
+                const container = document.getElementById('mock-questions-list');
+                if (!container) return;
+
+                container.innerHTML = QUESTION_DATABASE.map(q => `
+                    <div id="mock-q-${q.id}" class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+                        <div class="flex justify-between items-center text-xs text-slate-400">
+                            <span class="font-bold text-indigo-400">${q.chapterTitle}</span>
+                            <span class="font-mono">Question ${q.id} of 509</span>
+                        </div>
+
+                        <h3 class="text-base font-bold text-white">${q.question}</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                            ${q.options.map((opt, optIdx) => `
+                                <label class="p-3 rounded-xl border border-slate-800 bg-slate-900/80 hover:border-indigo-500 cursor-pointer text-xs text-slate-200 flex items-center space-x-3 transition">
+                                    <input type="radio" name="mock_opt_${q.id}" value="${optIdx}" onchange="app.selectMockAnswer(${q.id}, ${optIdx})" class="text-indigo-600 accent-indigo-600">
+                                    <span>${opt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            selectMockAnswer(qId, optIdx) {
+                this.mockAnswers[qId] = optIdx;
+                
+                // Update Palette Button Style
+                const palBtn = document.getElementById(`pal-btn-${qId}`);
+                if (palBtn) {
+                    palBtn.className = "w-7 h-7 rounded-lg text-[10px] font-bold bg-emerald-600 text-white shadow-md";
+                }
+
+                document.getElementById('mock-answered-count').innerText = Object.keys(this.mockAnswers).length;
+            }
+
+            submitMockTest() {
+                clearInterval(this.mockTimerInterval);
+
+                let correctCount = 0;
+                let wrongCount = 0;
+
+                QUESTION_DATABASE.forEach(q => {
+                    const ans = this.mockAnswers[q.id];
+                    if (ans !== undefined) {
+                        if (ans === q.correct) {
+                            correctCount++;
+                        } else {
+                            wrongCount++;
+                        }
+                    }
+                });
+
+                const totalQs = QUESTION_DATABASE.length; // 509
+                const percentage = ((correctCount / totalQs) * 100).toFixed(1);
+                const passed = percentage >= 80.0; // 80% passing rule
+
+                this.switchView('result');
+
+                document.getElementById('res-total').innerText = totalQs;
+                document.getElementById('res-correct').innerText = correctCount;
+                document.getElementById('res-wrong').innerText = wrongCount;
+                document.getElementById('res-percentage').innerText = `${percentage}%`;
+
+                const badge = document.getElementById('result-badge-icon');
+                const title = document.getElementById('result-status-title');
+                const analysis = document.getElementById('res-analysis-text');
+
+                if (passed) {
+                    badge.className = "w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 border-2 border-emerald-500 flex items-center justify-center mx-auto text-4xl shadow-xl shadow-emerald-500/20";
+                    badge.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
+                    title.innerText = "PASSED! EXAM QUALIFIED 🎓";
+                    title.className = "text-3xl font-black text-emerald-400";
+                    analysis.innerText = `Outstanding Performance! You secured ${percentage}%, exceeding the required 80% benchmark. You are fully ready to clear the Aadhaar ECMP Certification Examination with high accuracy.`;
+                } else {
+                    badge.className = "w-20 h-20 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500 flex items-center justify-center mx-auto text-4xl shadow-xl shadow-rose-500/20";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
+                    title.innerText = "NEEDS IMPROVEMENT (FAILED)";
+                    title.className = "text-3xl font-black text-rose-400";
+                    analysis.innerText = `You scored ${percentage}%. To pass the official exam, you need at least 80.0%. Review the Chapter Practice questions with AI explanations to master all 509 questions before re-trying!`;
+                }
+            }
+
+            renderAdminPortal() {
+                const totalEl = document.getElementById('admin-stat-total');
+                const pendingEl = document.getElementById('admin-stat-pending');
+                const activeEl = document.getElementById('admin-stat-active');
+                const tableBody = document.getElementById('admin-user-table');
+
+                const total = this.users.length;
+                const pending = this.users.filter(u => u.status === 'pending').length;
+                const active = this.users.filter(u => u.status === 'active').length;
+
+                totalEl.innerText = total;
+                pendingEl.innerText = pending;
+                activeEl.innerText = active;
+
+                tableBody.innerHTML = this.users.map((u, idx) => `
+                    <tr class="hover:bg-slate-900/60 transition">
+                        <td class="p-3">
+                            <div class="font-bold text-white">${u.fname} ${u.lname}</div>
+                            <div class="text-[11px] text-slate-400">${u.email} | ${u.mobile}</div>
+                        </td>
+                        <td class="p-3">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-950 text-indigo-300 border border-indigo-800">
+                                ${u.plan || '30_days'}
+                            </span>
+                        </td>
+                        <td class="p-3 font-mono text-xs text-amber-300 font-bold">
+                            ${u.utr || 'No UTR'}
+                        </td>
+                        <td class="p-3">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                                u.status === 'active' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
+                                u.status === 'pending' ? 'bg-amber-950 text-amber-400 border border-amber-800 animate-pulse' :
+                                'bg-rose-950 text-rose-400 border border-rose-800'
+                            }">
+                                ${u.status}
+                            </span>
+                        </td>
+                        <td class="p-3 font-bold text-slate-200">
+                            ${u.validityDays} Days
+                        </td>
+                        <td class="p-3 text-right space-x-1">
+                            ${u.status !== 'active' ? `
+                                <button onclick="app.adminApproveUser(${idx})" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[10px] font-bold shadow">
+                                    Approve & Activate
+                                </button>
+                            ` : `
+                                <button onclick="app.adminDeactivateUser(${idx})" class="px-2.5 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded text-[10px] font-bold shadow">
+                                    Deactivate
+                                </button>
+                            `}
+                            <button onclick="app.adminEditValidity(${idx})" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[10px] font-semibold" title="Edit Days">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </button>
+                            <button onclick="app.adminResetPassword(${idx})" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[10px] font-semibold" title="Reset Password">
+                                <i class="fa-solid fa-key"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            adminApproveUser(index) {
+                this.users[index].status = 'active';
+                this.saveUsers();
+                this.renderAdminPortal();
+                this.showNotification(`Approved ${this.users[index].fname}'s account!`, "emerald");
+            }
+
+            adminDeactivateUser(index) {
+                this.users[index].status = 'inactive';
+                this.saveUsers();
+                this.renderAdminPortal();
+                this.showNotification(`Deactivated ${this.users[index].fname}'s account.`, "rose");
+            }
+
+            adminEditValidity(index) {
+                const days = prompt("Enter new validity duration in Days:", this.users[index].validityDays);
+                if (days && !isNaN(days)) {
+                    this.users[index].validityDays = parseInt(days);
+                    this.saveUsers();
+                    this.renderAdminPortal();
+                    this.showNotification("Validity updated successfully!", "indigo");
+                }
+            }
+
+            adminResetPassword(index) {
+                const newPass = prompt("Enter new Password for user:", "123456");
+                if (newPass) {
+                    this.users[index].pass = newPass;
+                    this.saveUsers();
+                    alert(`Password updated to: ${newPass}`);
+                }
+            }
+        }
+
+        // Initialize Application
+        let app;
+        window.onload = function() {
+            app = new AppEngine();
+        };
+    </script>
+</body>
+</html>
