@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Study Portal - Secure Operator & Supervisor Exam Prep</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+        }
+
+        /* Anti-Copy Protection Overlay */
+        .watermark-bg {
+            background-image: repeating-linear-gradient(45deg, rgba(99, 102, 241, 0.02) 0px, rgba(99, 102, 241, 0.02) 100px, rgba(16, 185, 129, 0.01) 100px, rgba(16, 185, 129, 0.01) 200px);
+        }
+
+        /* Allow typing in form inputs while preventing text selection */
+        input, select, textarea {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 watermark-bg min-h-screen flex flex-col justify-between" oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;" ondragstart="return false;" ondrop="return false;">
+
+    <!-- Custom Security Violation Alert Modal -->
+    <div id="security-alert-modal" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl border border-red-500/20">
+                <i class="fa-solid fa-shield-halved animate-pulse"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-white mb-2">High Security Protection Active</h3>
+            <p id="security-alert-text" class="text-slate-400 text-xs leading-relaxed mb-6">
+                Copying, text selection, printing, or inspecting portal material is strictly restricted to prevent question theft and maintain exam integrity.
+            </p>
+            <button onclick="closeSecurityAlert()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl font-bold text-sm transition shadow-lg shadow-indigo-600/20">
+                I Understand & Agree
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin: Add Member Modal -->
+    <div id="admin-add-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-user-plus text-indigo-400 text-lg"></i>
+                    <h3 class="text-base font-bold text-white">Create Member License</h3>
+                </div>
+                <button onclick="closeAdminModal('admin-add-modal')" class="text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <form onsubmit="handleAdminCreateMember(event)" class="space-y-4">
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">First Name</label>
+                        <input type="text" id="adm-add-first" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Middle Name</label>
+                        <input type="text" id="adm-add-middle" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Last Name</label>
+                        <input type="text" id="adm-add-last" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email ID</label>
+                        <input type="email" id="adm-add-email" required placeholder="user@domain.com" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Mobile Number</label>
+                        <input type="tel" id="adm-add-mobile" required placeholder="9876543210" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Password</label>
+                        <input type="text" id="adm-add-pass" required placeholder="Min 6 chars" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Account Status</label>
+                        <select id="adm-add-status" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-white outline-none">
+                            <option value="active">Active (Grant Access)</option>
+                            <option value="pending">Pending Verification</option>
+                            <option value="paused">Paused / Expired</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Subscription Plan</label>
+                        <select id="adm-add-plan" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-indigo-400 outline-none">
+                            <option value="299">1 Month Plan (32 Days) - ₹299</option>
+                            <option value="399">2 Month Plan (64 Days) - ₹399</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">UTR Reference</label>
+                        <input type="text" id="adm-add-utr" placeholder="ADMIN-VERIFIED" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 rounded-xl transition shadow-lg mt-2">
+                    Create & Activate Access
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin: Edit Member & Validity Modal -->
+    <div id="admin-edit-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4 mb-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-user-pen text-indigo-400 text-lg"></i>
+                    <h3 class="text-base font-bold text-white">Edit Member License, Validity & Status</h3>
+                </div>
+                <button onclick="closeAdminModal('admin-edit-modal')" class="text-slate-400 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <form onsubmit="handleAdminUpdateMember(event)" class="space-y-4">
+                <input type="hidden" id="adm-edit-email">
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">First Name</label>
+                        <input type="text" id="adm-edit-first" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Middle Name</label>
+                        <input type="text" id="adm-edit-middle" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Last Name</label>
+                        <input type="text" id="adm-edit-last" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Mobile Number</label>
+                        <input type="tel" id="adm-edit-mobile" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Password</label>
+                        <input type="text" id="adm-edit-pass" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">UTR Reference</label>
+                        <input type="text" id="adm-edit-utr" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-indigo-300 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Account State</label>
+                        <select id="adm-edit-status" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-white outline-none">
+                            <option value="active">Active (Grant Access)</option>
+                            <option value="pending">Pending Verification</option>
+                            <option value="paused">Paused / Expired</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Subscription Plan</label>
+                        <select id="adm-edit-plan" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-indigo-400 outline-none">
+                            <option value="299">1 Month Plan (32 Days)</option>
+                            <option value="399">2 Month Plan (64 Days)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Reset Remaining Days</label>
+                        <input type="number" id="adm-edit-custom-days" min="1" max="365" placeholder="e.g. 30, 60, 90" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-emerald-400 outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3 rounded-xl transition shadow-lg mt-2">
+                    Save Changes & Update License
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= PRE-LOGIN AUTH & SUBSCRIPTION GATEWAY ================= -->
+    <div id="auth-container" class="flex-grow flex items-center justify-center p-4 py-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden transition-all duration-300">
+            
+            <!-- Hidden Admin Console Trigger on Header Logo Click -->
+            <div id="hidden-logo-trigger" onclick="handleLogoClick()" class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-8 text-center text-white relative cursor-pointer select-none group">
+                <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-indigo-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-graduation-cap text-3xl text-indigo-400"></i>
+                </div>
+                <h1 class="text-2xl font-black tracking-tight text-white">My Study Portal</h1>
+                <p class="text-xs text-indigo-300 font-semibold mt-1 uppercase tracking-widest">Secure Operator & Supervisor Exam Entrance</p>
+                <div class="mt-2 inline-block bg-indigo-900/40 text-indigo-300 text-[10px] font-bold px-3 py-1 rounded-full border border-indigo-700/40">
+                    <i class="fa-solid fa-lock mr-1"></i> Anti-Theft Protected System
+                </div>
+            </div>
+
+            <!-- Login View -->
+            <div id="login-view" class="p-8 space-y-6">
+                <div class="text-center">
+                    <h2 class="text-lg font-bold text-white">Sign In to My Study Portal</h2>
+                    <p class="text-xs text-slate-400">Enter your credentials to access your exam study desk</p>
+                </div>
+
+                <form onsubmit="handleUserLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">User ID / Registered Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+                                <i class="fa-solid fa-envelope text-xs"></i>
+                            </span>
+                            <input type="email" id="login-email" required placeholder="user@domain.com" class="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white focus:bg-slate-800 focus:border-indigo-500 outline-none transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+                                <i class="fa-solid fa-key text-xs"></i>
+                            </span>
+                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white focus:bg-slate-800 focus:border-indigo-500 outline-none transition">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3.5 rounded-xl transition shadow-lg shadow-indigo-600/20 active:scale-[0.99]">
+                        Sign In & Enter Desk
+                    </button>
+                </form>
+
+                <div class="pt-4 border-t border-slate-800 text-center space-y-2">
+                    <p class="text-xs text-slate-400">Don't have an active subscription account?</p>
+                    <button onclick="switchAuthScreen('signup')" class="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition inline-flex items-center gap-1">
+                        <span>Register & Select Plan</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Signup Screen -->
+            <div id="signup-view" class="hidden p-8 space-y-5 max-h-[80vh] overflow-y-auto">
+                <div class="text-center">
+                    <h2 class="text-lg font-bold text-white">Register Account</h2>
+                    <p class="text-xs text-slate-400">Enter personal details & pick your preparation validity</p>
+                </div>
+
+                <form onsubmit="handleSignupStep(event)" class="space-y-4">
+                    <div class="grid grid-cols-3 gap-2 sm:gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">First Name</label>
+                            <input type="text" id="reg-first" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Middle</label>
+                            <input type="text" id="reg-middle" class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Last Name</label>
+                            <input type="text" id="reg-last" required class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Mobile Number</label>
+                        <input type="tel" id="reg-mobile" required placeholder="9876543210" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email Address (Login User ID)</label>
+                        <input type="email" id="reg-email" required placeholder="user@domain.com" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Password</label>
+                        <input type="password" id="reg-password" minlength="6" required placeholder="Min 6 characters" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+
+                    <!-- Subscription Validity Plan Options -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-indigo-400 uppercase tracking-wider">Select Subscription Duration</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="relative flex flex-col p-3.5 bg-slate-800/80 border border-slate-700 rounded-2xl cursor-pointer hover:border-indigo-500 transition">
+                                <input type="radio" name="plan-option" value="299" checked class="absolute top-3 right-3 text-indigo-500">
+                                <span class="text-xs font-black text-white">1 Month Plan</span>
+                                <span class="text-lg font-black text-indigo-400 mt-1">₹299</span>
+                                <span class="text-[10px] text-slate-400 mt-1">32 Days Active Access</span>
+                            </label>
+                            <label class="relative flex flex-col p-3.5 bg-slate-800/80 border border-slate-700 rounded-2xl cursor-pointer hover:border-indigo-500 transition">
+                                <input type="radio" name="plan-option" value="399" class="absolute top-3 right-3 text-indigo-500">
+                                <span class="text-xs font-black text-white">2 Month Plan</span>
+                                <span class="text-lg font-black text-indigo-400 mt-1">₹399</span>
+                                <span class="text-[10px] text-slate-400 mt-1">64 Days Active Access</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3 rounded-xl transition shadow-lg">
+                        Proceed to Payment Procedure
+                    </button>
+                </form>
+
+                <div class="pt-3 border-t border-slate-800 text-center">
+                    <button onclick="switchAuthScreen('login')" class="text-xs font-bold text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Already registered? Sign In
+                    </button>
+                </div>
+            </div>
+
+            <!-- Procedure Payment View -->
+            <div id="payment-view" class="hidden p-8 space-y-6">
+                <div class="text-center space-y-1">
+                    <span class="bg-indigo-900/60 text-indigo-300 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-700/50">Official Razorpay Gateway</span>
+                    <h2 class="text-lg font-bold text-white mt-2">Complete Instant Subscription</h2>
+                    <p class="text-xs text-slate-400">Pay securely via Razorpay, then submit your UTR reference for verification.</p>
+                </div>
+
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl space-y-5">
+                    <div class="space-y-2">
+                        <span class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider">Subscription Plan Summary</span>
+                        <div class="flex justify-between items-center bg-slate-900/80 px-4 py-3 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-400" id="payment-plan-label">Selected Plan: 1 Month (32 Days)</span>
+                            <span class="text-lg font-black text-emerald-400" id="payment-amount-label">₹299.00</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-950/40 border border-indigo-500/30 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center space-x-2 text-indigo-300 font-bold text-xs">
+                            <i class="fa-solid fa-1"></i>
+                            <span>Step 1: Open Payment Gateway</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">
+                            Click below to open Razorpay and complete payment via UPI, GPay, PhonePe, or Card.
+                        </p>
+                        <button onclick="initiateRazorpayPayment()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2 mt-2">
+                            <i class="fa-solid fa-external-link"></i>
+                            <span>Pay via Razorpay Now</span>
+                        </button>
+                    </div>
+
+                    <!-- Step 2: UTR Reference Submission Form -->
+                    <form onsubmit="handleUTRSubmission(event)" class="bg-slate-900/90 border border-slate-700/80 p-4 rounded-xl space-y-3">
+                        <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs">
+                            <i class="fa-solid fa-2"></i>
+                            <span>Step 2: Enter Payment UTR / Reference ID</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400">
+                            After payment, copy your 12-digit UPI UTR / Bank Reference Number and paste it below to submit for Admin review.
+                        </p>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider mb-1">12-Digit UTR / Transaction No.</label>
+                            <input type="text" id="reg-utr-input" required placeholder="e.g. 421098765432 or RZP-1029" class="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none focus:border-indigo-500 transition">
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Submit UTR for Admin Review</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="switchAuthScreen('signup')" class="text-xs font-semibold text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Back to Plan Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lock / Pending Approval View -->
+            <div id="locked-view" class="hidden p-8 text-center space-y-6">
+                <div class="w-16 h-16 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                    <i class="fa-solid fa-clock-rotate-left animate-spin-slow"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-lg font-bold text-white" id="locked-heading">Account Awaiting Admin Review</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="locked-subtext">Your subscription details and UTR have been sent to the Administrator. Access will be activated once verified.</p>
+                </div>
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl text-left space-y-1">
+                    <span class="block text-[10px] uppercase font-bold text-slate-400">Submitted UTR Reference</span>
+                    <span class="text-xs font-bold text-indigo-300" id="locked-utr-display">N/A</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="checkAccountStatus()" class="bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-xl text-xs font-bold transition shadow flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-sync"></i>
+                        <span>Check Status Now</span>
+                    </button>
+                    <button onclick="switchAuthScreen('login')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 py-2.5 rounded-xl text-xs font-bold transition">
+                        Return to Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Secret Portal Login View -->
+            <div id="admin-login-view" class="hidden p-8 space-y-6">
+                <div class="text-center">
+                    <h2 class="text-lg font-bold text-white"><i class="fa-solid fa-user-shield text-indigo-400 mr-2"></i>Admin Console Login</h2>
+                    <p class="text-xs text-slate-400">Enter system administrator credentials</p>
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Email ID</label>
+                        <input type="email" id="admin-email" required placeholder="admin@domain.com" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Admin Password</label>
+                        <input type="password" id="admin-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white outline-none">
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3.5 rounded-xl transition shadow-lg">
+                        Sign In as System Admin
+                    </button>
+                </form>
+
+                <div class="pt-4 border-t border-slate-800 text-center">
+                    <button onclick="switchAuthScreen('login')" class="text-xs font-bold text-slate-400 hover:text-white transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Return to Member Login
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= ADMIN PORTAL DASHBOARD ================= -->
+    <div id="admin-portal" class="hidden flex-col flex-grow min-h-screen bg-slate-900">
+        <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow">
+                        <i class="fa-solid fa-user-gear text-base"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-white text-base">My Study Portal Console</h1>
+                        <span class="text-[9px] uppercase font-bold text-indigo-400 tracking-wider">License Manager Tower</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button onclick="logoutAdmin()" class="bg-slate-800 hover:bg-red-950/80 text-slate-300 hover:text-red-400 border border-slate-700 hover:border-red-800/50 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-power-off"></i>
+                        <span>Exit Admin</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+            <div class="bg-slate-800/60 border border-slate-700/70 p-6 rounded-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-extrabold text-white">Member License & Verification Control</h2>
+                    <p class="text-xs text-slate-400">Verify Razorpay UTR receipts to activate 32-day (1M) or 64-day (2M) subscriptions.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="openAdminAddModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Add Member</span>
+                    </button>
+                    <button onclick="renderAdminTable()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow">
+                        <i class="fa-solid fa-sync"></i>
+                        <span>Refresh List</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Statistics Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Total Registers</span>
+                        <h3 class="text-2xl font-black text-white mt-1" id="stat-admin-total">0</h3>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-700/50 rounded-xl flex items-center justify-center text-slate-300">
+                        <i class="fa-solid fa-users text-base"></i>
+                    </div>
+                </div>
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-amber-400 uppercase">Pending Review</span>
+                        <h3 class="text-2xl font-black text-amber-400 mt-1" id="stat-admin-pending">0</h3>
+                    </div>
+                    <div class="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-400">
+                        <i class="fa-solid fa-clock-rotate-left text-base"></i>
+                    </div>
+                </div>
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700/60 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-emerald-400 uppercase">Active Licenses</span>
+                        <h3 class="text-2xl font-black text-emerald-400 mt-1" id="stat-admin-active">0</h3>
+                    </div>
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-circle-check text-base"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Members Data Table -->
+            <div class="bg-slate-800/60 border border-slate-700/70 rounded-3xl overflow-hidden shadow-xl">
+                <div class="px-6 py-4 bg-slate-900/80 border-b border-slate-700/70">
+                    <h3 class="font-bold text-white text-xs uppercase tracking-wider">Member Accounts Registry</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-700/60 text-left">
+                        <thead class="bg-slate-900/40">
+                            <tr>
+                                <th class="px-6 py-3.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Member</th>
+                                <th class="px-6 py-3.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Contact & Pass</th>
+                                <th class="px-6 py-3.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Plan / Days Left</th>
+                                <th class="px-6 py-3.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Submitted UTR</th>
+                                <th class="px-6 py-3.5 text-[10px] font-black text-slate-400 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3.5 text-right text-[10px] font-black text-slate-400 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-slate-700/50 bg-transparent text-xs text-slate-300">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= MAIN LOGGED IN APP DESK PORTAL ================= -->
+    <div id="app-portal" class="hidden flex-col flex-grow min-h-screen bg-slate-950 text-slate-100">
+        <!-- Header / Navigation Bar -->
+        <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow">
+                        <i class="fa-solid fa-graduation-cap text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-black text-white text-base leading-tight">My Study Portal</h1>
+                        <span class="text-[9px] uppercase font-bold text-indigo-400 tracking-wider">Operator & Supervisor Exam Desk</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button onclick="switchTab('study')" id="tab-btn-study" class="flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Study Desk</span>
+                    </button>
+                    <button onclick="switchTab('test')" id="tab-btn-test" class="flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <span>Mock Test</span>
+                    </button>
+                    <button onclick="switchTab('notes')" id="tab-btn-notes" class="flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span class="hidden sm:inline">Notebook</span>
+                    </button>
+                    
+                    <div class="border-l border-slate-800 pl-3 flex items-center space-x-3">
+                        <div class="hidden md:block text-right">
+                            <span class="block text-xs font-bold text-white" id="user-display-name">User Name</span>
+                            <span class="block text-[9px] text-emerald-400 font-bold" id="user-display-days">Active Access</span>
+                        </div>
+                        <button onclick="logoutUser()" class="w-8 h-8 bg-slate-800 hover:bg-red-950 text-slate-300 hover:text-red-400 rounded-xl flex items-center justify-center transition border border-slate-700">
+                            <i class="fa-solid fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 rounded-3xl p-6 mb-6 shadow-xl relative overflow-hidden">
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div>
+                        <h2 class="text-xl font-black text-white mb-2 tracking-tight">Secure Operator & Supervisor Exam Preparation</h2>
+                        <p class="text-slate-300 text-xs max-w-2xl leading-relaxed">
+                            Comprehensive study materials covering core syllabus chapters. Attempt standard practice mock tests and track active subscription validity.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="bg-slate-950/80 border border-indigo-500/30 px-4 py-2.5 rounded-2xl text-center">
+                            <span class="block text-[9px] text-indigo-300 uppercase font-bold tracking-wider">Remaining Days</span>
+                            <span class="text-lg font-black text-emerald-400" id="banner-remaining-days">32 Days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 1: STUDY DESK ================= -->
+            <div id="tab-study" class="space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <!-- Chapter Sidebar Menu -->
+                    <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-4 space-y-3">
+                        <div class="flex justify-between items-center mb-2 px-1">
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Chapters Syllabus</h3>
+                            <span class="text-[10px] bg-slate-800 text-indigo-300 font-bold px-2.5 py-0.5 rounded-full border border-slate-700">509 Qs</span>
+                        </div>
+                        <div class="space-y-1.5" id="study-chapters-list">
+                            <!-- Populated in JS -->
+                        </div>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="lg:col-span-3 space-y-4">
+                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-lg space-y-6">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                                <span class="bg-indigo-900/60 text-indigo-300 border border-indigo-700/50 text-xs font-bold px-3 py-1 rounded-full" id="study-chapter-badge">Chapter 1</span>
+                                <span class="text-slate-400 text-xs font-semibold" id="study-q-counter">Question 1 of 5</span>
+                            </div>
+
+                            <div class="space-y-6">
+                                <h2 class="text-sm sm:text-base font-bold text-white leading-relaxed" id="study-question-text">
+                                    Loading Study Question...
+                                </h2>
+
+                                <div class="space-y-2.5" id="study-options-container">
+                                    <!-- Dynamic options -->
+                                </div>
+
+                                <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                                    <div class="flex space-x-2">
+                                        <button onclick="navigateStudyQuestion(-1)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition">
+                                            <i class="fa-solid fa-arrow-left mr-1"></i> Prev
+                                        </button>
+                                        <button onclick="navigateStudyQuestion(1)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition">
+                                            Next <i class="fa-solid fa-arrow-right ml-1"></i>
+                                        </button>
+                                    </div>
+
+                                    <button onclick="toggleStudyAnswer()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow">
+                                        <i class="fa-solid fa-check-double"></i> Show Correct Option & Explanation
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Explanation Block -->
+                            <div id="study-explanation-box" class="hidden mt-6 bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-2">
+                                <h4 class="text-xs font-black uppercase text-emerald-400 tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i> Answer Details
+                                </h4>
+                                <p class="text-xs font-semibold text-slate-300">Correct Option: <span class="text-white font-bold" id="study-correct-text"></span></p>
+                                <p class="text-xs text-slate-400 leading-relaxed" id="study-explanation-text">Explanation details...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 2: MOCK TEST ENGINE ================= -->
+            <div id="tab-test" class="hidden space-y-6">
+                <!-- Test Configuration Block -->
+                <div id="test-config-block" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl max-w-xl mx-auto space-y-6">
+                    <div class="text-center space-y-1">
+                        <h2 class="text-lg font-black text-white">Practice Mock Exam Simulator</h2>
+                        <p class="text-xs text-slate-400">Configure your practice set based on official exam parameters.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Select Syllabus Coverage</label>
+                            <select id="mock-chapter-select" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-white outline-none">
+                                <option value="all">Full Exam Simulation (All Chapters)</option>
+                                <option value="1">Chapter 1: Introduction</option>
+                                <option value="2">Chapter 2: Registrars & Enrolment Agencies</option>
+                                <option value="3">Chapter 3: Staff & Operators</option>
+                                <option value="4">Chapter 4: Enrolment / Update Process</option>
+                                <option value="5">Chapter 5: Demographic & Biometric Capture</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Target Certification</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="border border-slate-800 p-3.5 rounded-2xl cursor-pointer hover:bg-slate-800/50 transition flex items-center space-x-2">
+                                    <input type="radio" name="cert-level" value="operator" checked class="text-indigo-500">
+                                    <div>
+                                        <span class="block text-xs font-bold text-white">Operator</span>
+                                        <span class="block text-[10px] text-slate-400">Min 55% passing score</span>
+                                    </div>
+                                </label>
+                                <label class="border border-slate-800 p-3.5 rounded-2xl cursor-pointer hover:bg-slate-800/50 transition flex items-center space-x-2">
+                                    <input type="radio" name="cert-level" value="supervisor" class="text-indigo-500">
+                                    <div>
+                                        <span class="block text-xs font-bold text-white">Supervisor</span>
+                                        <span class="block text-[10px] text-slate-400">Min 77% passing score</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="startMockTest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-3.5 rounded-xl transition shadow-lg mt-2">
+                            Start Secure Mock Exam Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Active Test Block -->
+                <div id="test-active-block" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-indigo-900/60 text-indigo-300 text-xs font-bold px-3 py-1 rounded-full border border-indigo-700/50" id="test-badge-mode">Full Test</span>
+                            <span class="text-slate-400 text-xs font-semibold" id="test-q-counter">Q 1 of 10</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-center">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Time Left</span>
+                            <span class="text-sm font-black text-amber-400" id="test-timer-display">10:00</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h2 class="text-sm sm:text-base font-bold text-white leading-relaxed" id="test-q-text">
+                            Test Question Text...
+                        </h2>
+
+                        <div class="space-y-2.5" id="test-options-container">
+                            <!-- Dynamic Options -->
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
+                            <button onclick="navigateTestQuestion(-1)" class="bg-slate-800 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition">
+                                Previous
+                            </button>
+                            <button onclick="navigateTestQuestion(1)" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition shadow">
+                                Next / Save
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800/80 flex justify-end">
+                        <button onclick="finishMockTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition shadow">
+                            Submit Final Test
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Test Result Modal -->
+                <div id="test-result-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 text-center space-y-5">
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto text-3xl" id="result-icon-box">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-extrabold text-white" id="result-title">Test Result</h3>
+                            <p class="text-xs text-slate-400 mt-1" id="result-subtext">Detailed score summary</p>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex justify-around">
+                            <div>
+                                <span class="block text-[10px] text-slate-400 uppercase font-bold">Total Score</span>
+                                <span class="text-lg font-black text-white" id="result-score-text">0 / 10</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-slate-400 uppercase font-bold">Percentage</span>
+                                <span class="text-lg font-black text-indigo-400" id="result-percent-text">0%</span>
+                            </div>
+                        </div>
+                        <button onclick="closeTestResult()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-3 rounded-xl transition">
+                            Return to Desk
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 3: PERSONAL NOTEBOOK ================= -->
+            <div id="tab-notes" class="hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+                    <h2 class="text-base font-bold text-white">Personal Study Notebook</h2>
+                    <p class="text-xs text-slate-400">Save key exam formulas, operational rules, and personal notes securely in your account session.</p>
+                    <textarea id="notebook-input" rows="8" placeholder="Type your personal study notes here..." class="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs font-medium text-white focus:border-indigo-500 outline-none transition"></textarea>
+                    <button onclick="saveUserNotes()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow">
+                        Save Notes
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Storage & Database Keys
+        const STORAGE_USERS_KEY = "my_study_portal_users_v2";
+        const STORAGE_LOGGED_USER_KEY = "my_study_portal_current_user_v2";
+        const STORAGE_ADMIN_SESSION_KEY = "my_study_portal_admin_v2";
+
+        // Global sign-up temporary state
+        let tempSignupData = null;
+
+        // Pre-populated initial user database if empty
+        const initialUsers = [
+            {
+                email: "demo@user.com",
+                password: "password123",
+                firstName: "Demo",
+                middleName: "S",
+                lastName: "User",
+                mobile: "9876543210",
+                plan: "299", // 1 Month = 32 Days
+                utr: "RZP-100200300",
+                status: "active",
+                activatedAt: Date.now() - (2 * 24 * 60 * 60 * 1000) // 2 days ago
+            }
+        ];
+
+        function getUsers() {
+            const data = localStorage.getItem(STORAGE_USERS_KEY);
+            if (!data) {
+                localStorage.setItem(STORAGE_USERS_KEY, JSON.stringify(initialUsers));
+                return initialUsers;
+            }
+            return JSON.parse(data);
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(STORAGE_USERS_KEY, JSON.stringify(users));
+        }
+
+        const questionDatabase = [
+            {
+                id: 1,
+                chapter: 1,
+                question: "Which entity is responsible for issuing unique identification numbers to residents of India?",
+                options: [
+                    "Aadhaar Issuing Authority",
+                    "Ministry of Finance",
+                    "State Electoral Officer",
+                    "Income Tax Department"
+                ],
+                correct: 0,
+                explanation: "The authorized authority under the UID project manages resident enrolment and standard identity issuance."
+            },
+            {
+                id: 2,
+                chapter: 1,
+                question: "What is the total number of digits in an Aadhaar unique identification number?",
+                options: ["10 Digits", "12 Digits", "16 Digits", "14 Digits"],
+                correct: 1,
+                explanation: "Aadhaar is a 12-digit random number assigned uniquely to every verified resident."
+            },
+            {
+                id: 3,
+                chapter: 2,
+                question: "Who is an Enrolment Agency (EA) in the enrolment ecosystem?",
+                options: [
+                    "An agency appointed by Registrars to collect demographic and biometric data",
+                    "A private software development firm",
+                    "A bank verifying loan applicants",
+                    "A courier agency delivering letters"
+                ],
+                correct: 0,
+                explanation: "Enrolment Agencies are engaged by Registrars for setting up centres and capturing resident details."
+            },
+            {
+                id: 4,
+                chapter: 3,
+                question: "What is the mandatory certification requirement for an Operator or Supervisor before operating?",
+                options: [
+                    "NSEIT Certification Exam passing",
+                    "Driving License certification",
+                    "High School diploma only",
+                    "No formal certification required"
+                ],
+                correct: 0,
+                explanation: "Operators and Supervisors must pass the certified testing agency exam (NSEIT) prior to onboard operational access."
+            },
+            {
+                id: 5,
+                chapter: 4,
+                question: "Which demographic fields are collected during standard enrolment?",
+                options: [
+                    "Name, DOB/Age, Gender, Address",
+                    "Bank Account Balance & Income",
+                    "Property Records & Tax Returns",
+                    "Medical History & Blood Group"
+                ],
+                correct: 0,
+                explanation: "Core demographic fields include Name, Date of Birth/Age, Gender, and Residential Address."
+            },
+            {
+                id: 6,
+                chapter: 5,
+                question: "Which biometrics are captured during standard adult enrolment?",
+                options: [
+                    "10 Iris scans, 2 Fingerprints, Signature",
+                    "10 Fingerprints, 2 Iris scans, Facial Photograph",
+                    "Facial photo & DNA sample",
+                    "Voice recording & Palm print"
+                ],
+                correct: 1,
+                explanation: "Standard biometric capture includes 10 fingerprints, both iris scans, and a clean facial photograph."
+            }
+        ];
+
+        // Prevent Keyboard Shortcuts (Ctrl+C, Ctrl+V, F12, Ctrl+Shift+I, Ctrl+P, Ctrl+S, Ctrl+U)
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C' || e.key === 'v' || e.key === 'V' || e.key === 'x' || e.key === 'X'))
+            ) {
+                e.preventDefault();
+                showSecurityAlert("Keyboard shortcuts for copying, printing, saving, or inspecting portal content are disabled.");
+                return false;
+            }
+        });
+
+        function showSecurityAlert(msg) {
+            document.getElementById('security-alert-text').innerText = msg;
+            document.getElementById('security-alert-modal').classList.remove('hidden');
+        }
+
+        function closeSecurityAlert() {
+            document.getElementById('security-alert-modal').classList.add('hidden');
+        }
+
+        // View Switcher Function for Auth Container
+        function switchAuthScreen(screen) {
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('signup-view').classList.add('hidden');
+            document.getElementById('payment-view').classList.add('hidden');
+            document.getElementById('locked-view').classList.add('hidden');
+            
+            const adminLoginView = document.getElementById('admin-login-view');
+            if (adminLoginView) adminLoginView.classList.add('hidden');
+
+            if (screen === 'login') {
+                document.getElementById('login-view').classList.remove('hidden');
+            } else if (screen === 'signup') {
+                document.getElementById('signup-view').classList.remove('hidden');
+            } else if (screen === 'payment') {
+                document.getElementById('payment-view').classList.remove('hidden');
+            } else if (screen === 'locked') {
+                document.getElementById('locked-view').classList.remove('hidden');
+            } else if (screen === 'admin-login') {
+                if (adminLoginView) adminLoginView.classList.remove('hidden');
+            }
+        }
+
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+
+        function handleLogoClick() {
+            logoClickCount++;
+            if (logoClickTimer) clearTimeout(logoClickTimer);
+
+            if (logoClickCount >= 4) {
+                logoClickCount = 0;
+                switchAuthScreen('admin-login');
+            } else {
+                logoClickTimer = setTimeout(() => {
+                    logoClickCount = 0;
+                }, 3000);
+            }
+        }
+
+        function calculateDaysRemaining(user) {
+            if (!user || user.status !== 'active' || !user.activatedAt) return 0;
+
+            let totalDaysAllowed = 32;
+            if (user.customDays) {
+                totalDaysAllowed = parseInt(user.customDays);
+            } else if (user.plan === "399") {
+                totalDaysAllowed = 64;
+            }
+
+            const msPassed = Date.now() - user.activatedAt;
+            const daysPassed = Math.floor(msPassed / (1000 * 60 * 60 * 24));
+            const remaining = totalDaysAllowed - daysPassed;
+
+            return remaining > 0 ? remaining : 0;
+        }
+
+        function handleSignupStep(event) {
+            event.preventDefault();
+            const first = document.getElementById('reg-first').value.trim();
+            const middle = document.getElementById('reg-middle').value.trim();
+            const last = document.getElementById('reg-last').value.trim();
+            const mobile = document.getElementById('reg-mobile').value.trim();
+            const email = document.getElementById('reg-email').value.trim().toLowerCase();
+            const pass = document.getElementById('reg-password').value;
+            
+            const selectedPlan = document.querySelector('input[name="plan-option"]:checked')?.value || "299";
+
+            const users = getUsers();
+            const existing = users.find(u => u.email === email);
+            if (existing && existing.status === 'active' && calculateDaysRemaining(existing) > 0) {
+                showSecurityAlert("An active account with this email already exists. Please sign in.");
+                switchAuthScreen('login');
+                return;
+            }
+
+            tempSignupData = {
+                firstName: first,
+                middleName: middle,
+                lastName: last,
+                mobile: mobile,
+                email: email,
+                password: pass,
+                plan: selectedPlan
+            };
+
+            const planText = (selectedPlan === "399") ? "2 Month Plan (64 Days)" : "1 Month Plan (32 Days)";
+            const planAmt = (selectedPlan === "399") ? "₹399.00" : "₹299.00";
+
+            document.getElementById('payment-plan-label').innerText = "Selected Plan: " + planText;
+            document.getElementById('payment-amount-label').innerText = planAmt;
+
+            switchAuthScreen('payment');
+        }
+
+        function initiateRazorpayPayment() {
+            if (!tempSignupData) {
+                switchAuthScreen('signup');
+                return;
+            }
+
+            const razorpayUrl = "https://rzp.io/rzp/msvqfDu1";
+            window.open(razorpayUrl, '_blank');
+            showSecurityAlert("Razorpay payment page opened in a new tab.\n\nAfter completing payment, copy your UTR / Reference number and paste it in Step 2 below.");
+        }
+
+        function handleUTRSubmission(event) {
+            event.preventDefault();
+            const utrVal = document.getElementById('reg-utr-input').value.trim();
+
+            if (!utrVal) {
+                showSecurityAlert("Please enter your 12-digit UTR or Transaction Reference number.");
+                return;
+            }
+
+            if (!tempSignupData) {
+                showSecurityAlert("Registration session expired. Please start registration again.");
+                switchAuthScreen('signup');
+                return;
+            }
+
+            const pendingUser = {
+                ...tempSignupData,
+                utr: utrVal,
+                status: "pending",
+                activatedAt: null,
+                createdAt: Date.now()
+            };
+
+            const users = getUsers();
+            const existingIdx = users.findIndex(u => u.email === pendingUser.email);
+            if (existingIdx !== -1) {
+                users[existingIdx] = pendingUser;
+            } else {
+                users.push(pendingUser);
+            }
+            saveUsers(users);
+
+            localStorage.setItem(STORAGE_LOGGED_USER_KEY, JSON.stringify(pendingUser));
+
+            document.getElementById('locked-heading').innerText = "Account Awaiting Admin Approval";
+            document.getElementById('locked-subtext').innerText = "Your subscription details and UTR have been sent to the Admin portal for verification.";
+            document.getElementById('locked-utr-display').innerText = utrVal;
+
+            switchAuthScreen('locked');
+            showSecurityAlert(`✅ UTR ${utrVal} Submitted Successfully!\n\nYour account is now pending Admin approval. You can click 'Check Status Now' anytime.`);
+        }
+
+        function checkAccountStatus() {
+            const loggedUserRaw = localStorage.getItem(STORAGE_LOGGED_USER_KEY);
+            if (!loggedUserRaw) {
+                switchAuthScreen('login');
+                return;
+            }
+
+            const current = JSON.parse(loggedUserRaw);
+            const users = getUsers();
+            const updatedUser = users.find(u => u.email === current.email);
+
+            if (updatedUser) {
+                localStorage.setItem(STORAGE_LOGGED_USER_KEY, JSON.stringify(updatedUser));
+                const remainingDays = calculateDaysRemaining(updatedUser);
+
+                if (updatedUser.status === 'active' && remainingDays > 0) {
+                    showSecurityAlert("🎉 Account Approved!\n\nYour subscription has been activated by the Admin. Entering Study Portal desk...");
+                    setTimeout(() => {
+                        closeSecurityAlert();
+                        openAppPortal(updatedUser);
+                    }, 1500);
+                } else if (updatedUser.status === 'paused') {
+                    showSecurityAlert("Account status is currently Paused or Expired. Please contact Admin.");
+                } else {
+                    showSecurityAlert(`Status: Pending Admin Review\n\nSubmitted UTR: ${updatedUser.utr || 'N/A'}\n\nPlease allow Admin some time to verify payment.`);
+                }
+            } else {
+                showSecurityAlert("Account record not found. Please register again.");
+                switchAuthScreen('signup');
+            }
+        }
+
+        function handleUserLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const pass = document.getElementById('login-password').value;
+
+            const users = getUsers();
+            const user = users.find(u => u.email === email && u.password === pass);
+
+            if (!user) {
+                showSecurityAlert("Invalid Login Email or Password. Please check credentials or register.");
+                return;
+            }
+
+            if (user.status === 'pending') {
+                document.getElementById('locked-heading').innerText = "Account Pending Verification";
+                document.getElementById('locked-subtext').innerText = "Your subscription request is still awaiting admin payment verification.";
+                document.getElementById('locked-utr-display').innerText = user.utr || "N/A";
+                switchAuthScreen('locked');
+                return;
+            }
+
+            const remainingDays = calculateDaysRemaining(user);
+            if (user.status === 'paused' || remainingDays <= 0) {
+                user.status = 'paused';
+                saveUsers(users);
+
+                tempSignupData = { ...user };
+                const planText = (user.plan === "399") ? "2 Month Plan Renewal (64 Days)" : "1 Month Plan Renewal (32 Days)";
+                const planAmt = (user.plan === "399") ? "₹399.00" : "₹299.00";
+
+                document.getElementById('payment-plan-label').innerText = "Renewal Required: " + planText;
+                document.getElementById('payment-amount-label').innerText = planAmt;
+                
+                showSecurityAlert("Your subscription validity period has expired. Please complete renewal payment to resume access.");
+                switchAuthScreen('payment');
+                return;
+            }
+
+            localStorage.setItem(STORAGE_LOGGED_USER_KEY, JSON.stringify(user));
+            openAppPortal(user);
+        }
+
+        function openAppPortal(user) {
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('admin-portal').classList.add('hidden');
+            document.getElementById('app-portal').classList.remove('hidden');
+
+            const remainingDays = calculateDaysRemaining(user);
+            document.getElementById('user-display-name').innerText = user.firstName + " " + user.lastName;
+            document.getElementById('user-display-days').innerText = remainingDays + " Days Remaining";
+            document.getElementById('banner-remaining-days').innerText = remainingDays + " Days";
+
+            initStudyDesk();
+        }
+
+        function logoutUser() {
+            localStorage.removeItem(STORAGE_LOGGED_USER_KEY);
+            document.getElementById('app-portal').classList.add('hidden');
+            document.getElementById('auth-container').classList.remove('hidden');
+            switchAuthScreen('login');
+        }
+
+        let currentStudyIndex = 0;
+
+        function initStudyDesk() {
+            const menu = document.getElementById('study-chapters-list');
+            menu.innerHTML = "";
+
+            const chapters = [
+                { id: 1, title: "Chapter 1: Intro to UID" },
+                { id: 2, title: "Chapter 2: Registrars & EAs" },
+                { id: 3, title: "Chapter 3: Staff & Operators" },
+                { id: 4, title: "Chapter 4: Enrolment Process" },
+                { id: 5, title: "Chapter 5: Biometric Capture" }
+            ];
+
+            chapters.forEach((ch, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${idx === 0 ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`;
+                btn.innerHTML = `<span>${ch.title}</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>`;
+                btn.onclick = () => {
+                    currentStudyIndex = 0;
+                    renderStudyQuestion();
+                };
+                menu.appendChild(btn);
+            });
+
+            renderStudyQuestion();
+        }
+
+        function renderStudyQuestion() {
+            const q = questionDatabase[currentStudyIndex] || questionDatabase[0];
+            document.getElementById('study-chapter-badge').innerText = `Chapter ${q.chapter}`;
+            document.getElementById('study-q-counter').innerText = `Question ${currentStudyIndex + 1} of ${questionDatabase.length}`;
+            document.getElementById('study-question-text').innerText = `${q.id}. ${q.question}`;
+
+            const optBox = document.getElementById('study-options-container');
+            optBox.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.className = "p-3.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-semibold text-slate-300 hover:border-slate-700 transition flex items-center space-x-3";
+                div.innerHTML = `<span class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 font-bold flex items-center justify-center text-[10px]">${String.fromCharCode(65 + idx)}</span> <span>${opt}</span>`;
+                optBox.appendChild(div);
+            });
+
+            document.getElementById('study-explanation-box').classList.add('hidden');
+        }
+
+        function navigateStudyQuestion(dir) {
+            currentStudyIndex += dir;
+            if (currentStudyIndex < 0) currentStudyIndex = 0;
+            if (currentStudyIndex >= questionDatabase.length) currentStudyIndex = questionDatabase.length - 1;
+            renderStudyQuestion();
+        }
+
+        function toggleStudyAnswer() {
+            const q = questionDatabase[currentStudyIndex] || questionDatabase[0];
+            const box = document.getElementById('study-explanation-box');
+            document.getElementById('study-correct-text').innerText = `Option ${String.fromCharCode(65 + q.correct)}: ${q.options[q.correct]}`;
+            document.getElementById('study-explanation-text').innerText = q.explanation;
+            box.classList.remove('hidden');
+        }
+
+        function switchTab(tab) {
+            document.getElementById('tab-study').classList.add('hidden');
+            document.getElementById('tab-test').classList.add('hidden');
+            document.getElementById('tab-notes').classList.add('hidden');
+
+            document.getElementById('tab-btn-study').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white hover:bg-slate-800";
+            document.getElementById('tab-btn-test').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white hover:bg-slate-800";
+            document.getElementById('tab-btn-notes').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition text-slate-400 hover:text-white hover:bg-slate-800";
+
+            if (tab === 'study') {
+                document.getElementById('tab-study').classList.remove('hidden');
+                document.getElementById('tab-btn-study').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white";
+            } else if (tab === 'test') {
+                document.getElementById('tab-test').classList.remove('hidden');
+                document.getElementById('tab-btn-test').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white";
+            } else if (tab === 'notes') {
+                document.getElementById('tab-notes').classList.remove('hidden');
+                document.getElementById('tab-btn-notes').className = "flex items-center space-x-2 px-3 py-2 rounded-xl text-xs font-bold transition bg-indigo-600 text-white";
+            }
+        }
+
+        let testQuestions = [];
+        let testCurrentIdx = 0;
+        let testUserAnswers = {};
+
+        function startMockTest() {
+            testQuestions = [...questionDatabase];
+            testCurrentIdx = 0;
+            testUserAnswers = {};
+
+            document.getElementById('test-config-block').classList.add('hidden');
+            document.getElementById('test-active-block').classList.remove('hidden');
+
+            renderTestQuestion();
+        }
+
+        function renderTestQuestion() {
+            const q = testQuestions[testCurrentIdx];
+            document.getElementById('test-q-counter').innerText = `Q ${testCurrentIdx + 1} of ${testQuestions.length}`;
+            document.getElementById('test-q-text').innerText = `${q.id}. ${q.question}`;
+
+            const optBox = document.getElementById('test-options-container');
+            optBox.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const label = document.createElement('label');
+                const isChecked = testUserAnswers[testCurrentIdx] === idx;
+                label.className = `p-3.5 border rounded-xl text-xs font-semibold flex items-center justify-between cursor-pointer transition ${isChecked ? 'bg-indigo-900/50 border-indigo-500 text-white' : 'bg-slate-950 border-slate-800 text-slate-300 hover:border-slate-700'}`;
+                label.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="w-6 h-6 rounded-lg bg-slate-800 text-slate-400 font-bold flex items-center justify-center text-[10px]">${String.fromCharCode(65 + idx)}</span>
+                        <span>${opt}</span>
+                    </div>
+                    <input type="radio" name="test-opt" value="${idx}" ${isChecked ? 'checked' : ''} onchange="testUserAnswers[${testCurrentIdx}] = ${idx}; renderTestQuestion();" class="text-indigo-500">
+                `;
+                optBox.appendChild(label);
+            });
+        }
+
+        function navigateTestQuestion(dir) {
+            testCurrentIdx += dir;
+            if (testCurrentIdx < 0) testCurrentIdx = 0;
+            if (testCurrentIdx >= testQuestions.length) testCurrentIdx = testQuestions.length - 1;
+            renderTestQuestion();
+        }
+
+        function finishMockTest() {
+            let correct = 0;
+            testQuestions.forEach((q, idx) => {
+                if (testUserAnswers[idx] === q.correct) correct++;
+            });
+
+            const percent = Math.round((correct / testQuestions.length) * 100);
+            document.getElementById('result-score-text').innerText = `${correct} / ${testQuestions.length}`;
+            document.getElementById('result-percent-text').innerText = `${percent}%`;
+
+            const iconBox = document.getElementById('result-icon-box');
+            if (percent >= 55) {
+                iconBox.className = "w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center mx-auto text-3xl";
+                document.getElementById('result-title').innerText = "Exam Passed!";
+                document.getElementById('result-subtext').innerText = "Congratulations! You reached the required pass percentage.";
+            } else {
+                iconBox.className = "w-16 h-16 rounded-2xl bg-red-500/10 text-red-400 border border-red-500/20 flex items-center justify-center mx-auto text-3xl";
+                document.getElementById('result-title').innerText = "Exam Retake Advised";
+                document.getElementById('result-subtext').innerText = "Keep reviewing study desk questions to improve score.";
+            }
+
+            document.getElementById('test-result-modal').classList.remove('hidden');
+        }
+
+        function closeTestResult() {
+            document.getElementById('test-result-modal').classList.add('hidden');
+            document.getElementById('test-active-block').classList.add('hidden');
+            document.getElementById('test-config-block').classList.remove('hidden');
+        }
+
+        function saveUserNotes() {
+            showSecurityAlert("Personal notes saved to active session successfully.");
+        }
+
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('admin-email').value.trim();
+            const pass = document.getElementById('admin-password').value;
+
+            if (email === "rehanpathan0989@gmail.com" && pass === "Rehan@1336") {
+                localStorage.setItem(STORAGE_ADMIN_SESSION_KEY, "true");
+                openAdminPortal();
+            } else {
+                showSecurityAlert("Invalid Admin Credentials.");
+            }
+        }
+
+        function openAdminPortal() {
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('app-portal').classList.add('hidden');
+            document.getElementById('admin-portal').classList.remove('hidden');
+
+            renderAdminTable();
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem(STORAGE_ADMIN_SESSION_KEY);
+            document.getElementById('admin-portal').classList.add('hidden');
+            document.getElementById('auth-container').classList.remove('hidden');
+            switchAuthScreen('login');
+        }
+
+        function renderAdminTable() {
+            const users = getUsers();
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = "";
+
+            let total = users.length;
+            let pending = 0;
+            let active = 0;
+
+            users.forEach(u => {
+                const remainingDays = calculateDaysRemaining(u);
+                if (u.status === 'pending') pending++;
+                if (u.status === 'active' && remainingDays > 0) active++;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/40 transition";
+
+                const planLabel = (u.plan === "399") ? "2M (64 Days)" : "1M (32 Days)";
+                const daysDisplay = (u.status === 'active') ? `${remainingDays} Days Remaining` : '0 Days (Inactive)';
+
+                let statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Pending</span>`;
+                if (u.status === 'active' && remainingDays > 0) {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Active</span>`;
+                } else if (u.status === 'paused' || remainingDays <= 0) {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20">Paused / Expired</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-bold text-white">
+                        ${u.firstName} ${u.lastName}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="font-semibold text-slate-300">${u.email}</div>
+                        <div class="text-[10px] text-slate-400">Pass: ${u.password} | Mob: ${u.mobile}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="font-bold text-indigo-400">${planLabel}</div>
+                        <div class="text-[10px] text-slate-400">${daysDisplay}</div>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-slate-300">
+                        ${u.utr || 'N/A'}
+                    </td>
+                    <td class="px-6 py-4">
+                        ${statusBadge}
+                    </td>
+                    <td class="px-6 py-4 text-right space-x-1">
+                        ${u.status === 'pending' ? `
+                            <button onclick="approveMember('${u.email}')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold transition">
+                                Approve
+                            </button>
+                        ` : ''}
+                        <button onclick="openAdminEditModal('${u.email}')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold transition">
+                            Edit / Days
+                        </button>
+                        <button onclick="deleteMember('${u.email}')" class="bg-slate-800 hover:bg-red-950 text-slate-400 hover:text-red-400 px-2 py-1 rounded-lg text-[10px] font-bold transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('stat-admin-total').innerText = total;
+            document.getElementById('stat-admin-pending').innerText = pending;
+            document.getElementById('stat-admin-active').innerText = active;
+        }
+
+        function approveMember(email) {
+            const users = getUsers();
+            const user = users.find(u => u.email === email);
+            if (user) {
+                user.status = "active";
+                user.activatedAt = Date.now();
+                saveUsers(users);
+                renderAdminTable();
+                showSecurityAlert(`Member ${user.firstName} ${user.lastName} has been APPROVED and activated!`);
+            }
+        }
+
+        function openAdminAddModal() {
+            document.getElementById('admin-add-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function handleAdminCreateMember(event) {
+            event.preventDefault();
+            const first = document.getElementById('adm-add-first').value.trim();
+            const middle = document.getElementById('adm-add-middle').value.trim();
+            const last = document.getElementById('adm-add-last').value.trim();
+            const email = document.getElementById('adm-add-email').value.trim().toLowerCase();
+            const mobile = document.getElementById('adm-add-mobile').value.trim();
+            const pass = document.getElementById('adm-add-pass').value;
+            const status = document.getElementById('adm-add-status').value;
+            const plan = document.getElementById('adm-add-plan').value;
+            const utr = document.getElementById('adm-add-utr').value.trim() || "ADMIN-CREATED";
+
+            const users = getUsers();
+            users.push({
+                firstName: first,
+                middleName: middle,
+                lastName: last,
+                email: email,
+                mobile: mobile,
+                password: pass,
+                status: status,
+                plan: plan,
+                utr: utr,
+                activatedAt: status === 'active' ? Date.now() : null
+            });
+
+            saveUsers(users);
+            closeAdminModal('admin-add-modal');
+            renderAdminTable();
+        }
+
+        function openAdminEditModal(email) {
+            const users = getUsers();
+            const u = users.find(usr => usr.email === email);
+            if (!u) return;
+
+            document.getElementById('adm-edit-email').value = u.email;
+            document.getElementById('adm-edit-first').value = u.firstName;
+            document.getElementById('adm-edit-middle').value = u.middleName || '';
+            document.getElementById('adm-edit-last').value = u.lastName;
+            document.getElementById('adm-edit-mobile').value = u.mobile;
+            document.getElementById('adm-edit-pass').value = u.password;
+            document.getElementById('adm-edit-utr').value = u.utr || '';
+            document.getElementById('adm-edit-status').value = u.status;
+            document.getElementById('adm-edit-plan').value = u.plan || '299';
+            document.getElementById('adm-edit-custom-days').value = u.customDays || calculateDaysRemaining(u) || '';
+
+            document.getElementById('admin-edit-modal').classList.remove('hidden');
+        }
+
+        function handleAdminUpdateMember(event) {
+            event.preventDefault();
+            const email = document.getElementById('adm-edit-email').value;
+            const users = getUsers();
+            const u = users.find(usr => usr.email === email);
+
+            if (u) {
+                u.firstName = document.getElementById('adm-edit-first').value.trim();
+                u.middleName = document.getElementById('adm-edit-middle').value.trim();
+                u.lastName = document.getElementById('adm-edit-last').value.trim();
+                u.mobile = document.getElementById('adm-edit-mobile').value.trim();
+                u.password = document.getElementById('adm-edit-pass').value;
+                u.utr = document.getElementById('adm-edit-utr').value.trim();
+                
+                const newStatus = document.getElementById('adm-edit-status').value;
+                const newPlan = document.getElementById('adm-edit-plan').value;
+                const customDaysInput = document.getElementById('adm-edit-custom-days').value;
+
+                u.status = newStatus;
+                u.plan = newPlan;
+
+                if (customDaysInput && parseInt(customDaysInput) > 0) {
+                    u.customDays = parseInt(customDaysInput);
+                    u.activatedAt = Date.now();
+                }
+
+                if (u.status === 'active' && !u.activatedAt) {
+                    u.activatedAt = Date.now();
+                }
+
+                saveUsers(users);
+                closeAdminModal('admin-edit-modal');
+                renderAdminTable();
+                showSecurityAlert("Member account & validity days updated successfully!");
+            }
+        }
+
+        function deleteMember(email) {
+            let users = getUsers();
+            users = users.filter(u => u.email !== email);
+            saveUsers(users);
+            renderAdminTable();
+        }
+
+        // On Page Load: Check existing session
+        window.onload = function () {
+            const loggedUser = localStorage.getItem(STORAGE_LOGGED_USER_KEY);
+            const adminSession = localStorage.getItem(STORAGE_ADMIN_SESSION_KEY);
+
+            if (adminSession === "true") {
+                openAdminPortal();
+            } else if (loggedUser) {
+                const user = JSON.parse(loggedUser);
+                const remaining = calculateDaysRemaining(user);
+                if (user.status === 'active' && remaining > 0) {
+                    openAppPortal(user);
+                } else {
+                    switchAuthScreen('login');
+                }
+            } else {
+                switchAuthScreen('login');
+            }
+        };
+    </script>
+</body>
+</html>
